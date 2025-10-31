@@ -1,0 +1,13 @@
+[project]
+name = "abafraudnlp"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "crawl4ai>=0.7.6",
+    "polars>=1.33.1",
+    "scikit-learn>=1.7.2",
+    "streamlit>=1.51.0",
+    "supabase>=2.22.4",
+]
