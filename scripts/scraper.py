@@ -1,6 +1,7 @@
 import asyncio
 from crawl4ai import AsyncWebCrawler, CrawlerRunConfig, CacheMode
 from crawl4ai.markdown_generation_strategy import DefaultMarkdownGenerator
+from rich import print
 
 def load_in_manual_sources(filepath):
     with open(filepath, 'r') as file:
@@ -18,6 +19,7 @@ async def scrape_website(urls):
     
     successful = 0
     failed = 0
+    seen_filenames = {}  # Track filenames to handle duplicates
     
     async with AsyncWebCrawler() as crawler:
         async for result in await crawler.arun_many(
@@ -38,25 +40,26 @@ async def scrape_website(urls):
                         file.write(result.markdown)
                     successful += 1
                 except Exception as e:
-                    print(f"Error saving {result.url}: {e}")
+                    print(f"[red]Error saving {result.url}: {e}[/red]")
                     failed += 1
             else:
-                print(f"Failed to crawl: {result.url}")
+                print(f"[red]Failed to crawl: {result.url}[/red]")
                 print(f"Error: {result.error_message}")
                 print("---")
                 failed += 1
                 # Don't return False - continue processing other URLs
     
-    print(f"\nSummary: {successful} successful, {failed} failed")
+    print(f"\n[blue]Summary: {successful} successful, {failed} failed[/blue]")
     return True  # Return success as long as we processed something
 
 async def main():
     urls = load_in_manual_sources('data/manual_search.txt')
+    print(f"[blue]Scraping {len(urls)} URLs[/blue]")
     success = await scrape_website(urls)
     if success:
-        print("Scraping completed successfully")
+        print("[green]Scraping completed successfully[/green]")
     else:
-        print("Scraping failed")
+        print("[red]Scraping failed[/red]")    
 
 if __name__ == "__main__":
     asyncio.run(main())
