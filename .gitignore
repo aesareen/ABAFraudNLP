@@ -214,5 +214,5 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
 /.history
-/data/scraped_results
