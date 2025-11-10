@@ -5,6 +5,8 @@ from rich import print
 from urllib.parse import urlparse
 import re
 
+# Nabeel was here!
+
 def load_in_manual_sources(filepath):
     with open(filepath, 'r') as file:
         return [line.strip() for line in file.readlines()]
