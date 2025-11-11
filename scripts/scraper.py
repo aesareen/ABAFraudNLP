@@ -35,6 +35,26 @@ def extract_filename_from_url(url):
     # Fallback: use domain name
     return parsed.netloc.replace('.', '_')
 
+
+def parse_result(markdown_content: str):
+    lines = markdown_content.split('\n')
+    date_lines = []
+    months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
+    result = lines
+    for i, line in enumerate(lines):
+        if any(month in line.strip().lower() for month in months):
+            date_lines.append(line)
+            continue
+        if line.strip().startswith('# '):
+            result = lines[i:]
+        # The minute we see this copyright sign, everything after this is absolutely useless, so we can stop
+        if '©' in line.strip():
+            result = date_lines + result
+            return '\n'.join(result)
+    
+    return '\n'.join(result)
+
+
 async def scrape_website(urls):
     config = CrawlerRunConfig(
         verbose=True,
@@ -73,6 +93,7 @@ async def scrape_website(urls):
                 print(f"[green]Successfully crawled: {result.url}[/green]")
                 
                 # Extract clean, human-readable filename
+                # Clean the markdown content               
                 base_filename = extract_filename_from_url(result.url)
                 
                 # Handle duplicate filenames by appending a counter
@@ -82,12 +103,16 @@ async def scrape_website(urls):
                     filename = f"{base_filename}_{seen_filenames[filename]}"
                 else:
                     seen_filenames[filename] = 0
+
+                # Clean out some of the junk from our result
+                result = parse_result(result.markdown)
                 
                 # Save with UTF-8 encoding
                 try:
                     filepath = f"data/scraped_results/{filename}.md"
                     with open(filepath, "w", encoding='utf-8') as file:
                         file.write(result.markdown)
+                        file.write(result)
                     print(f"  → Saved as: [cyan]{filename}.md[/cyan]")
                     successful += 1
                 except Exception as e:
@@ -99,9 +124,11 @@ async def scrape_website(urls):
                 print("---")
                 failed += 1
                 # Don't return False - continue processing other URLs
+                
     
     print(f"\n[blue]Summary: {successful} successful, {failed} failed[/blue]")
     return True  # Return success as long as we processed something
+    return True  
 
 async def main():
     urls = load_in_manual_sources('data/manual_search.txt')
