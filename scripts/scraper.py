@@ -1,6 +1,7 @@
 import asyncio
 from crawl4ai import AsyncWebCrawler, CrawlerRunConfig, CacheMode
 from crawl4ai.markdown_generation_strategy import DefaultMarkdownGenerator
+from crawl4ai.content_filter_strategy import PruningContentFilter
 from rich import print
 from urllib.parse import urlparse
 import re
@@ -40,6 +41,21 @@ async def scrape_website(urls):
         stream=True,
         cache_mode=CacheMode.BYPASS,
         markdown_generator=DefaultMarkdownGenerator(),
+        markdown_generator=DefaultMarkdownGenerator(
+            options = {
+                "ignore_links": True,
+                "ignore_images": True,
+                "skip_internal_links": True,
+            },
+            content_filter = PruningContentFilter(
+                threshold=0.80,
+                threshold_type="dynamic",
+                min_word_threshold=0
+        ), 
+        ),
+        excluded_tags = [],
+        exclude_social_media_links = True,
+        exclude_external_links = True,
         page_timeout=60000,  # 60 seconds timeout
         delay_before_return_html=2.0,  # Wait 2 seconds before extracting
     )
