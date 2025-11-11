@@ -1,78 +1,30 @@
-[ ![ABA Banking Journal](https://abajournal2023.wpengine.com/wp-content/uploads/2024/02/2024-ABA-Banking-Journal-Masthead-470x100-1.png) ](https://bankingjournal.aba.com/)
-[](https://bankingjournal.aba.com/2025/06/fighting-fraud-on-the-frontline/)
-No Result 
-  * [Topics](https://bankingjournal.aba.com/2025/06/fighting-fraud-on-the-frontline/)
-    * [Ag Banking](https://bankingjournal.aba.com/category/ag-banking/)
-    * [Commercial Lending](https://bankingjournal.aba.com/category/commerciallending/)
-    * [Community Banking](https://bankingjournal.aba.com/category/communitybanking/)
-    * [Compliance and Risk](https://bankingjournal.aba.com/category/compliance/)
-    * [Cybersecurity](https://bankingjournal.aba.com/category/cybersecurity/)
-    * [Economy](https://bankingjournal.aba.com/category/economy/)
-    * [Human Resources](https://bankingjournal.aba.com/category/humanresources/)
-    * [Insurance](https://bankingjournal.aba.com/category/aba-banking-journal/insurance/)
-    * [Legal](https://bankingjournal.aba.com/category/legal/)
-    * [Mortgage](https://bankingjournal.aba.com/category/mortgage/)
-    * [Mutual Funds](https://bankingjournal.aba.com/category/mutual/)
-    * [Payments](https://bankingjournal.aba.com/category/payments/)
-    * [Policy](https://bankingjournal.aba.com/category/policy/)
-    * [Retail and Marketing](https://bankingjournal.aba.com/category/marketing/)
-    * [Tax and Accounting](https://bankingjournal.aba.com/category/taxaccounting/)
-    * [Technology](https://bankingjournal.aba.com/category/technology/)
-    * [Wealth Management](https://bankingjournal.aba.com/category/wealthmanagement/)
-  * [Newsbytes](https://bankingjournal.aba.com/category/newsbytes/)
-  * [Podcasts](https://bankingjournal.aba.com/podcasts/)
-  * [Magazine](https://www.bankingjournal-digital.com/baks/library/)
-    * [Subscribe](https://bankingjournal.aba.com/subscribe/)
-    * [Advertise](https://bankingjournal.aba.com/advertising/)
-    * [Magazine Archive](https://www.bankingjournal-digital.com/baks/library/)
-    * [Newsletter Archive](https://www.naylornetwork.com/bak-nwl/)
-    * [Podcast Archive](https://bankingjournal.aba.com/category/aba-banking-journal-podcast/)
-    * [Sponsored Content Archive](https://bankingjournal.aba.com/category/sponsored-content-2/)
-
-
-[ ](https://bankingjournal.aba.com/subscribe/)
-[ ![ABA Banking Journal](https://abajournal2023.wpengine.com/wp-content/uploads/2024/02/2024-ABA-Banking-Journal-Masthead-207x50-1.png) ](https://bankingjournal.aba.com/)
-  * [Topics](https://bankingjournal.aba.com/2025/06/fighting-fraud-on-the-frontline/)
-    * [Ag Banking](https://bankingjournal.aba.com/category/ag-banking/)
-    * [Commercial Lending](https://bankingjournal.aba.com/category/commerciallending/)
-    * [Community Banking](https://bankingjournal.aba.com/category/communitybanking/)
-    * [Compliance and Risk](https://bankingjournal.aba.com/category/compliance/)
-    * [Cybersecurity](https://bankingjournal.aba.com/category/cybersecurity/)
-    * [Economy](https://bankingjournal.aba.com/category/economy/)
-    * [Human Resources](https://bankingjournal.aba.com/category/humanresources/)
-    * [Insurance](https://bankingjournal.aba.com/category/aba-banking-journal/insurance/)
-    * [Legal](https://bankingjournal.aba.com/category/legal/)
-    * [Mortgage](https://bankingjournal.aba.com/category/mortgage/)
-    * [Mutual Funds](https://bankingjournal.aba.com/category/mutual/)
-    * [Payments](https://bankingjournal.aba.com/category/payments/)
-    * [Policy](https://bankingjournal.aba.com/category/policy/)
-    * [Retail and Marketing](https://bankingjournal.aba.com/category/marketing/)
-    * [Tax and Accounting](https://bankingjournal.aba.com/category/taxaccounting/)
-    * [Technology](https://bankingjournal.aba.com/category/technology/)
-    * [Wealth Management](https://bankingjournal.aba.com/category/wealthmanagement/)
-  * [Newsbytes](https://bankingjournal.aba.com/category/newsbytes/)
-  * [Podcasts](https://bankingjournal.aba.com/podcasts/)
-  * [Magazine](https://www.bankingjournal-digital.com/baks/library/)
-    * [Subscribe](https://bankingjournal.aba.com/subscribe/)
-    * [Advertise](https://bankingjournal.aba.com/advertising/)
-    * [Magazine Archive](https://www.bankingjournal-digital.com/baks/library/)
-    * [Newsletter Archive](https://www.naylornetwork.com/bak-nwl/)
-    * [Podcast Archive](https://bankingjournal.aba.com/category/aba-banking-journal-podcast/)
-    * [Sponsored Content Archive](https://bankingjournal.aba.com/category/sponsored-content-2/)
-
-
-[](https://bankingjournal.aba.com/2025/06/fighting-fraud-on-the-frontline/)
-No Result 
-[](https://bankingjournal.aba.com/2025/06/fighting-fraud-on-the-frontline/)
-[ ![](https://abajournal2023.wpengine.com/wp-content/uploads/2024/02/2024-ABA-Banking-Journal-Masthead-REVERSE-207x50-1.png) ](https://bankingjournal.aba.com/)
-[](https://bankingjournal.aba.com/2025/06/fighting-fraud-on-the-frontline/)
-No Result 
-[Home](https://bankingjournal.aba.com) [Compliance and Risk](https://bankingjournal.aba.com/category/compliance/)
+## Customer inquiries and complaints are important tools for detecting scams, but structural barriers in the bank may prevent them from being fully used.
+June 30, 2025
+Frontline staff are often the first line of defense for banks, but communications barriers and a general lack of awareness about warning signs mean consumer complaints suggesting fraud may not reach the people who monitor such things.
+Frontline staff are often the first line of defense for banks, but communications barriers and a general lack of awareness about warning signs mean consumer complaints suggesting fraud may not reach the people who monitor such things.
+One struggle for banks is that staff turnover is greatest on the frontline, so training is a continuous education process. Gliha suggests creating resources such as videos and checklists that staff can easily access and reference to quickly identify and respond to fraud. But given how busy frontline staff are, she says that an in-person approach may work best, so she advises weekly meetings or short huddles with staff on what they should look out for.
+“Make it real so they are sensitive to it because you can get a little calloused over time: ‘Well, everybody’s fallen victim.’ You can’t do that when you’re face to face with somebody, and it may be their first or 10th time, but it is a very real crisis for them,” she says.
+November 10, 2025
+November 6, 2025
+November 6, 2025
+November 5, 2025
+November 5, 2025
+November 5, 2025
+November 10, 2025
+November 10, 2025
+November 9, 2025
+November 1, 2025
+###  5 FedNow®  Service Developments You May Have Missed
+October 31, 2025
+October 20, 2025
+October 1, 2025
+November 6, 2025
+October 23, 2025
+October 16, 2025
 # Fighting fraud on the frontline
 ## Customer inquiries and complaints are important tools for detecting scams, but structural barriers in the bank may prevent them from being fully used.
-[June 30, 2025](https://bankingjournal.aba.com/2025/06/fighting-fraud-on-the-frontline/)
+June 30, 2025
 Reading Time: 6 mins read 
-[![Fighting fraud on the frontline](https://bankingjournal.aba.com/wp-content/uploads/2025/06/Picture1-e1750863427294-750x536.jpg)](https://bankingjournal.aba.com/wp-content/uploads/2025/06/Picture1-e1750863427294.jpg)
 **By Walt Williams**
 Like many banks, the Nebraska-based Security National Bank has a customer service line that takes complaints and questions, and that line is often at the forefront of the bank’s efforts to protect its customers from fraud and scams. Lindsay Lindmier, VP and director of financial crimes at Security National, works with the bank’s compliance officer to monitor the complaint line for potential fraud.
 Some scams are easier to tease out than others, Lindmier says. For instance, the bank sometimes gets calls from customers saying they were contacted by bank representatives with hard-to-understand foreign accents.
@@ -110,130 +62,106 @@ Also, Gliha suggests making the threat that fraud poses personal so staff unders
 “I’m a compliance geek, right? I can talk to you all day long [on compliance] and in about 30 seconds of time, your eyes are going to glaze over,” she says. “You’re going to say, ‘Give me a checklist and let me know when I need to deal with it.’ But if I can say, ‘Has this ever happened to you? Has it happened to your mother? Your children? Your grandmother?’ I will have your attention.
 “Make it real so they are sensitive to it because you can get a little calloused over time: ‘Well, everybody’s fallen victim.’ You can’t do that when you’re face to face with somebody, and it may be their first or 10th time, but it is a very real crisis for them,” she says.
 **TOOLKIT**
-Help your frontline succeed on the front lines of risk and fraud with ABA’s revamped Frontline Compliance Training, free to all ABA member banks. Access it at [aba.com/frontline](http://aba.com/frontline).
-Tags: [Customer communications](https://bankingjournal.aba.com/tag/customer-communications/)[Customers](https://bankingjournal.aba.com/tag/customers/)[Fraud](https://bankingjournal.aba.com/tag/fraud/)[Risk management](https://bankingjournal.aba.com/tag/risk-management/)
-[Share](http://www.facebook.com/sharer.php?u=https%3A%2F%2Fbankingjournal.aba.com%2F2025%2F06%2Ffighting-fraud-on-the-frontline%2F)[ __Tweet](https://twitter.com/intent/tweet?text=Fighting%20fraud%20on%20the%20frontline&url=https%3A%2F%2Fbankingjournal.aba.com%2F2025%2F06%2Ffighting-fraud-on-the-frontline%2F)[ Pin](https://www.pinterest.com/pin/create/bookmarklet/?pinFave=1&url=https%3A%2F%2Fbankingjournal.aba.com%2F2025%2F06%2Ffighting-fraud-on-the-frontline%2F&media=https://bankingjournal.aba.com/wp-content/uploads/2025/06/Picture1-e1750863427294.jpg&description=Fighting%20fraud%20on%20the%20frontline)
-[](https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fbankingjournal.aba.com%2F2025%2F06%2Ffighting-fraud-on-the-frontline%2F&title=Fighting%20fraud%20on%20the%20frontline)
-[](https://bankingjournal.aba.com/2025/06/fighting-fraud-on-the-frontline/)
+Help your frontline succeed on the front lines of risk and fraud with ABA’s revamped Frontline Compliance Training, free to all ABA member banks. Access it at aba.com/frontline.
+Tags: Customer communicationsCustomersFraudRisk management
 ### Author
-![Walt Williams](https://bankingjournal.aba.com/wp-content/uploads/2022/09/1557587245196-150x150.jpg)
-###  [ Walt Williams ](https://bankingjournal.aba.com/author/walt-williams/)
+###  Walt Williams 
 Walt Williams is senior editor of ABA Banking Journal. 
 ### Related Posts
-[![Sen. Tillis proposes legislation to address debanking](https://bankingjournal.aba.com/wp-content/themes/jnews/assets/img/jeg-empty.png)](https://bankingjournal.aba.com/2025/10/sen-tillis-proposes-legislation-to-address-debanking/)
-###  [Sen. Tillis proposes legislation to address debanking](https://bankingjournal.aba.com/2025/10/sen-tillis-proposes-legislation-to-address-debanking/)
-[Compliance and Risk](https://bankingjournal.aba.com/category/compliance/)
-[ October 30, 2025](https://bankingjournal.aba.com/2025/10/sen-tillis-proposes-legislation-to-address-debanking/)
-Sen. Thom Tillis (R-N.C.) released a discussion draft of proposed legislation to address alleged debanking by banks and banking regulators by creating a national standard for account access and establishing new watchdog mechanisms for banking agencies.
-[![FOMC minutes: Persistent inflation clouds path forward](https://bankingjournal.aba.com/wp-content/themes/jnews/assets/img/jeg-empty.png)](https://bankingjournal.aba.com/2025/10/report-fed-to-trim-bank-supervision-staff-by-30/)
-###  [Report: Fed to trim bank supervision staff by 30%](https://bankingjournal.aba.com/2025/10/report-fed-to-trim-bank-supervision-staff-by-30/)
-[Compliance and Risk](https://bankingjournal.aba.com/category/compliance/)
-[ October 30, 2025](https://bankingjournal.aba.com/2025/10/report-fed-to-trim-bank-supervision-staff-by-30/)
-The Federal Reserve will reduce its bank supervision staff by 30% by the end of next year, the Wall Street Journal reported.
-[![Fed’s Bowman to keynote ABA Conference for Community Bankers](https://bankingjournal.aba.com/wp-content/themes/jnews/assets/img/jeg-empty.png)](https://bankingjournal.aba.com/2025/10/bowman-banking-agencies-need-to-take-regulatory-review-seriously/)
-###  [Bowman: Banking agencies need to take regulatory review ‘seriously’](https://bankingjournal.aba.com/2025/10/bowman-banking-agencies-need-to-take-regulatory-review-seriously/)
-[Compliance and Risk](https://bankingjournal.aba.com/category/compliance/)
-[ October 30, 2025](https://bankingjournal.aba.com/2025/10/bowman-banking-agencies-need-to-take-regulatory-review-seriously/)
-Banking agencies are required by Congress to review their regulations every 10 years but their past reviews have been “underwhelming,” resulting in no reduction in regulatory burden, Federal Reserve Vice Chair for Supervision Michelle Bowman said.
-[![Executive order phases out U.S. Treasury paper checks](https://bankingjournal.aba.com/wp-content/themes/jnews/assets/img/jeg-empty.png)](https://bankingjournal.aba.com/2025/10/fraud-watch-verifying-treasury-checks-before-theyre-cashed/)
-###  [Fraud Watch: Verifying Treasury checks before they’re cashed](https://bankingjournal.aba.com/2025/10/fraud-watch-verifying-treasury-checks-before-theyre-cashed/)
-[Compliance and Risk](https://bankingjournal.aba.com/category/compliance/)
-[ October 30, 2025](https://bankingjournal.aba.com/2025/10/fraud-watch-verifying-treasury-checks-before-theyre-cashed/)
-With ABA’s every-increasing anti-fraud resources bankers can save their banks and their customers a lot of money.
-[![CFPB launches ‘tip line’ to report on bureau employees](https://bankingjournal.aba.com/wp-content/themes/jnews/assets/img/jeg-empty.png)](https://bankingjournal.aba.com/2025/10/cfpb-rescinds-changes-to-adjudication-process/)
-###  [CFPB rescinds changes to adjudication process](https://bankingjournal.aba.com/2025/10/cfpb-rescinds-changes-to-adjudication-process/)
-[Compliance and Risk](https://bankingjournal.aba.com/category/compliance/)
-[ October 29, 2025](https://bankingjournal.aba.com/2025/10/cfpb-rescinds-changes-to-adjudication-process/)
-The CFPB rescinded a series of changes made to its rules that, among other things, gave its director authority to resolve adjudication hearings overseen by the agency.
-[![CFPB claims ‘complex’ pricing drives up cost of financial products](https://bankingjournal.aba.com/wp-content/themes/jnews/assets/img/jeg-empty.png)](https://bankingjournal.aba.com/2025/10/cfpb-rescinds-nonbank-registry-rule/)
-###  [CFPB rescinds nonbank registry rule](https://bankingjournal.aba.com/2025/10/cfpb-rescinds-nonbank-registry-rule/)
-[Compliance and Risk](https://bankingjournal.aba.com/category/compliance/)
-[ October 29, 2025](https://bankingjournal.aba.com/2025/10/cfpb-rescinds-nonbank-registry-rule/)
-The CFPB has nixed a registry to track information on consumer protection violations by nonbanks, citing concerns about compliance costs.
+###  Chair’s View: Forging ahead toward banking’s bright future
+Community Banking
+November 10, 2025
+'Pull up your seat at the table and help us write the next chapter of this great industry.'
+###  Podcast: The Erie Canal at 200
+ABA Banking Journal Podcast
+November 6, 2025
+Economic historian John Steele Gordon and editor-in-chief Evan Sparks discuss how the Erie Canal was financed and built—and how it transformed America.
+###  The brokered deposit statute is out of sync with today’s financial marketplace 
+Community Banking
+November 6, 2025
+Congress should repeal Section 29 of the Federal Deposit Insurance Act and replace it with a targeted asset-growth restriction for troubled banks. 
+###  Fed finalizes revisions to rating system for large banks
+Compliance and Risk
+November 5, 2025
+The Federal Reserve finalized revisions to its supervisory rating framework for large banks to address the “well managed” status of the institutions.
+###  ABA, associations share recommendations for implementing Genius Act
+Compliance and Risk
+November 5, 2025
+As the Treasury Department crafts regulations to implement the Genius Act, it should seek to preserve the benefits of payment stablecoins without causing unnecessary risks for customers, credit availability and financial stability, ABA and four associations said in...
+###  Survey: Most consumers uncomfortable talking about finances
+Financial Education
+November 5, 2025
+A new survey found that when talking to friends or family, most people find it easier to discuss politics or their love life than their bank accounts.
 ### NEWSBYTES
-###  [Appeals court upholds Fed decision to deny crypto firm master account](https://bankingjournal.aba.com/2025/10/appeals-court-rejects-crypto-firms-motion-for-fed-master-account-access/)
-[ October 31, 2025](https://bankingjournal.aba.com/2025/10/appeals-court-rejects-crypto-firms-motion-for-fed-master-account-access/)
-###  [ABA DataBank: Candy prices outpace headline inflation](https://bankingjournal.aba.com/2025/10/aba-databank-candy-prices-outpace-headline-inflation/)
-[ October 31, 2025](https://bankingjournal.aba.com/2025/10/aba-databank-candy-prices-outpace-headline-inflation/)
-###  [Survey: Small-business owners generally happy with their banks](https://bankingjournal.aba.com/2025/10/survey-small-business-owners-generally-happy-with-their-banks/)
-[ October 31, 2025](https://bankingjournal.aba.com/2025/10/survey-small-business-owners-generally-happy-with-their-banks/)
+###  ABA, associations welcome deal to end government shutdown
+November 10, 2025
+###  FHFA nearing deal to use new FICO credit scoring model for mortgages
+November 10, 2025
+###  Senate takes first step to end government shutdown
+November 9, 2025
 ### SPONSORED CONTENT
-[![Seeing More Check Fraud and Scams? These Educational Online Toolkits Can Help](https://bankingjournal.aba.com/wp-content/uploads/2025/10/ABA-Sponsored-Content-120x86.png)](https://bankingjournal.aba.com/2025/11/seeing-more-check-fraud-and-scams-these-educational-online-toolkits-can-help/)
-###  [Seeing More Check Fraud and Scams? These Educational Online Toolkits Can Help](https://bankingjournal.aba.com/2025/11/seeing-more-check-fraud-and-scams-these-educational-online-toolkits-can-help/)
-[ November 1, 2025](https://bankingjournal.aba.com/2025/11/seeing-more-check-fraud-and-scams-these-educational-online-toolkits-can-help/)
-[![5 FedNow®  Service Developments You May Have Missed](https://bankingjournal.aba.com/wp-content/uploads/2025/10/2ABA-Sponsored-Content-Image-120x86.png)](https://bankingjournal.aba.com/2025/10/5-fednow-service-developments-you-may-have-missed/)
-###  [5 FedNow®  Service Developments You May Have Missed](https://bankingjournal.aba.com/2025/10/5-fednow-service-developments-you-may-have-missed/)
-[ October 31, 2025](https://bankingjournal.aba.com/2025/10/5-fednow-service-developments-you-may-have-missed/)
-[![](https://bankingjournal.aba.com/wp-content/uploads/2025/10/GD_Logo_GieseckeDevrient-01-2-2-120x86.jpg)](https://bankingjournal.aba.com/2025/10/cash-security-and-resilience-in-a-digital-first-economy/)
-###  [Cash, Security, and Resilience in a Digital-First Economy](https://bankingjournal.aba.com/2025/10/cash-security-and-resilience-in-a-digital-first-economy/)
-[ October 20, 2025](https://bankingjournal.aba.com/2025/10/cash-security-and-resilience-in-a-digital-first-economy/)
-[![Rethinking Outsourcing: The Value of Tech-Enabled, Strategic Growth Partnerships](https://bankingjournal.aba.com/wp-content/themes/jnews/assets/img/jeg-empty.png)](https://bankingjournal.aba.com/2025/10/rethinking-outsourcing-the-value-of-tech-enabled-strategic-growth-partnerships/)
-###  [Rethinking Outsourcing: The Value of Tech-Enabled, Strategic Growth Partnerships](https://bankingjournal.aba.com/2025/10/rethinking-outsourcing-the-value-of-tech-enabled-strategic-growth-partnerships/)
-[ October 1, 2025](https://bankingjournal.aba.com/2025/10/rethinking-outsourcing-the-value-of-tech-enabled-strategic-growth-partnerships/)
+###  Seeing More Check Fraud and Scams? These Educational Online Toolkits Can Help
+November 1, 2025
+###  5 FedNow®  Service Developments You May Have Missed
+October 31, 2025
+###  Cash, Security, and Resilience in a Digital-First Economy
+October 20, 2025
+###  Rethinking Outsourcing: The Value of Tech-Enabled, Strategic Growth Partnerships
+October 1, 2025
 ### PODCASTS
-###  [Podcast: Why branches are top priority for PNC](https://bankingjournal.aba.com/2025/10/podcast-why-branches-are-top-priority-for-pnc/)
-[ October 23, 2025](https://bankingjournal.aba.com/2025/10/podcast-why-branches-are-top-priority-for-pnc/)
-###  [Podcast: From tractors to drones, how farming tech affects ag lending](https://bankingjournal.aba.com/2025/10/podcast-from-tractors-to-drones-how-farming-tech-affects-ag-lending/)
-[ October 16, 2025](https://bankingjournal.aba.com/2025/10/podcast-from-tractors-to-drones-how-farming-tech-affects-ag-lending/)
-###  [Podcast: Bigger data boosts financial inclusion at Synchrony](https://bankingjournal.aba.com/2025/10/podcast-bigger-data-boosts-financial-inclusion-at-synchrony/)
-[ October 9, 2025](https://bankingjournal.aba.com/2025/10/podcast-bigger-data-boosts-financial-inclusion-at-synchrony/)
+###  Podcast: The Erie Canal at 200
+November 6, 2025
+###  Podcast: Why branches are top priority for PNC
+October 23, 2025
+###  Podcast: From tractors to drones, how farming tech affects ag lending
+October 16, 2025
 **American Bankers Association**  
 1333 New Hampshire Ave NW  
 Washington, DC 20036  
-[1-800-BANKERS (800-226-5377)](tel:1-800-226-5377)  
-[www.aba.com](https://www.aba.com)  
-[About ABA](https://www.aba.com/about-us)  
-[Privacy Policy](https://www.aba.com/privacy-policy)  
-[Contact ABA](https://www.aba.com/about-us/contact-us)
+  
+www.aba.com  
+About ABA  
+Privacy Policy  
+Contact ABA
 **ABA Banking Journal**  
-[About ABA Banking Journal](https://bankingjournal.aba.com/about/)  
-[Media Kit](https://go.advertising.naylor.com/ABA_LP)  
-[Advertising](https://bankingjournal.aba.com/advertising/)  
-[Subscribe](https://bankingjournal.aba.com/subscribe/)
-![](https://bankingjournal.aba.com/wp-content/uploads/2025/02/NOTAGLINE_ABA_150_Primary_Gold-300x90.png)
-[](http://facebook.com)[__](http://twitter.com)
+About ABA Banking Journal  
+  
+Advertising  
+Subscribe
 © 2025 American Bankers Association. All rights reserved. 
-[](https://bankingjournal.aba.com/2025/06/fighting-fraud-on-the-frontline/#back-to-top)
 __
-[](https://bankingjournal.aba.com/2025/06/fighting-fraud-on-the-frontline/)
-[](https://bankingjournal.aba.com/2025/06/fighting-fraud-on-the-frontline/)
 No Result 
-  * [Topics](https://bankingjournal.aba.com/2025/06/fighting-fraud-on-the-frontline/)
-    * [Ag Banking](https://bankingjournal.aba.com/category/ag-banking/)
-    * [Commercial Lending](https://bankingjournal.aba.com/category/commerciallending/)
-    * [Community Banking](https://bankingjournal.aba.com/category/communitybanking/)
-    * [Compliance and Risk](https://bankingjournal.aba.com/category/compliance/)
-    * [Cybersecurity](https://bankingjournal.aba.com/category/cybersecurity/)
-    * [Economy](https://bankingjournal.aba.com/category/economy/)
-    * [Human Resources](https://bankingjournal.aba.com/category/humanresources/)
-    * [Insurance](https://bankingjournal.aba.com/category/aba-banking-journal/insurance/)
-    * [Legal](https://bankingjournal.aba.com/category/legal/)
-    * [Mortgage](https://bankingjournal.aba.com/category/mortgage/)
-    * [Mutual Funds](https://bankingjournal.aba.com/category/mutual/)
-    * [Payments](https://bankingjournal.aba.com/category/payments/)
-    * [Policy](https://bankingjournal.aba.com/category/policy/)
-    * [Retail and Marketing](https://bankingjournal.aba.com/category/marketing/)
-    * [Tax and Accounting](https://bankingjournal.aba.com/category/taxaccounting/)
-    * [Technology](https://bankingjournal.aba.com/category/technology/)
-    * [Wealth Management](https://bankingjournal.aba.com/category/wealthmanagement/)
-  * [Newsbytes](https://bankingjournal.aba.com/category/newsbytes/)
-  * [Podcasts](https://bankingjournal.aba.com/podcasts/)
-  * [Magazine](https://www.bankingjournal-digital.com/baks/library/)
-    * [Subscribe](https://bankingjournal.aba.com/subscribe/)
-    * [Advertise](https://bankingjournal.aba.com/advertising/)
-    * [Magazine Archive](https://www.bankingjournal-digital.com/baks/library/)
-    * [Newsletter Archive](https://www.naylornetwork.com/bak-nwl/)
-    * [Podcast Archive](https://bankingjournal.aba.com/category/aba-banking-journal-podcast/)
-    * [Sponsored Content Archive](https://bankingjournal.aba.com/category/sponsored-content-2/)
+  * Topics
+    * Ag Banking
+    * Commercial Lending
+    * Community Banking
+    * Compliance and Risk
+    * Cybersecurity
+    * Economy
+    * Human Resources
+    * Insurance
+    * Legal
+    * Mortgage
+    * Mutual Funds
+    * Payments
+    * Policy
+    * Retail and Marketing
+    * Tax and Accounting
+    * Technology
+    * Wealth Management
+  * Newsbytes
+  * Podcasts
+  *     * Subscribe
+    * Advertise
+    * Podcast Archive
+    * Sponsored Content Archive
 
 
-[](http://facebook.com)[__](http://twitter.com)
 © 2025 American Bankers Association. All rights reserved.
-![Company Logo](https://cdn.cookielaw.org/logos/72d7a65d-c454-4cfb-9add-af2b67aa0547/48775df9-70cd-49a5-a5a4-c421d84ab1cf/9441890b-953a-4ed9-8436-24ddea577074/logo-aba.png)
 Your Opt Out Preference Signal is Honored
 ## Privacy Preference Center
 When you visit any website, it may store or retrieve information on your browser, mostly in the form of cookies. This information might be about you, your preferences or your device and is mostly used to make the site work as you expect it to. The information does not usually directly identify you, but it can give you a more personalized web experience. Because we respect your right to privacy, you can choose not to allow some types of cookies. Click on the different category headings to find out more and change our default settings. However, blocking some types of cookies may impact your experience of the site and the services we are able to offer.   
-[Privacy Policy and Cookies](https://www.aba.com/privacy-policy)
+Privacy Policy and Cookies
 Allow All
 ### Cookie Settings
 #### Strictly Necessary Cookies
@@ -266,4 +194,3 @@ checkbox label label
 checkbox label label
 checkbox label label
 Confirm My Choices
-[![Powered by Onetrust](https://cdn.cookielaw.org/logos/static/powered_by_logo.svg)](https://www.onetrust.com/products/cookie-consent/)

@@ -60,7 +60,6 @@ async def scrape_website(urls):
         verbose=True,
         stream=True,
         cache_mode=CacheMode.BYPASS,
-        markdown_generator=DefaultMarkdownGenerator(),
         markdown_generator=DefaultMarkdownGenerator(
             options = {
                 "ignore_links": True,
@@ -92,11 +91,9 @@ async def scrape_website(urls):
             if result.success:
                 print(f"[green]Successfully crawled: {result.url}[/green]")
                 
-                # Extract clean, human-readable filename
                 # Clean the markdown content               
                 base_filename = extract_filename_from_url(result.url)
                 
-                # Handle duplicate filenames by appending a counter
                 filename = base_filename
                 if filename in seen_filenames:
                     seen_filenames[filename] += 1
@@ -107,11 +104,9 @@ async def scrape_website(urls):
                 # Clean out some of the junk from our result
                 result = parse_result(result.markdown)
                 
-                # Save with UTF-8 encoding
                 try:
                     filepath = f"data/scraped_results/{filename}.md"
                     with open(filepath, "w", encoding='utf-8') as file:
-                        file.write(result.markdown)
                         file.write(result)
                     print(f"  → Saved as: [cyan]{filename}.md[/cyan]")
                     successful += 1
@@ -123,11 +118,9 @@ async def scrape_website(urls):
                 print(f"Error: {result.error_message}")
                 print("---")
                 failed += 1
-                # Don't return False - continue processing other URLs
                 
     
     print(f"\n[blue]Summary: {successful} successful, {failed} failed[/blue]")
-    return True  # Return success as long as we processed something
     return True  
 
 async def main():
