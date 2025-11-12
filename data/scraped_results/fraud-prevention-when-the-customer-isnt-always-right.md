@@ -1,15 +1,15 @@
 October 3, 2025
 “There are several examples that can come into play when a customer is not right,” she said. “Those situations may include a customer trying to convince staff to circumvent policies that are there to protect the institution. Other instances that require the institution to say no to the request of the customer are there to protect the customer from fraud and abuse.”
 “Providing both scenario-based and ‘soft-skill’ training are important,” Bennett said. “First, scenario-based training allows employees to understand the different situations that they may encounter to trust their instinct or gut when something is telling them that what is being requested doesn’t seem right. Soft skill training provides an understanding of knowing what questions to ask and how to ask them.”
+November 12, 2025
 November 5, 2025
 November 5, 2025
 November 4, 2025
 November 4, 2025
 November 4, 2025
-November 3, 2025
-November 10, 2025
-November 10, 2025
-November 9, 2025
+November 12, 2025
+November 12, 2025
+November 11, 2025
 November 1, 2025
 ###  5 FedNow®  Service Developments You May Have Missed
 October 31, 2025
@@ -36,6 +36,10 @@ Tags: Customer experienceCustomer serviceFinancial crimesFraud
 ###  Christopher Delporte 
 Christopher Delporte is a senior editor for the ABA Banking Journal and vice president of editorial strategy for member communications at the American Bankers Association. 
 ### Related Posts
+###  ABA Fraudcast: The bank that breaks the spell
+Compliance and Risk
+November 12, 2025
+Santander UK’s scam-interruption team confronts delicate issues customers in difficult moments.
 ###  Fed finalizes revisions to rating system for large banks
 Compliance and Risk
 November 5, 2025
@@ -56,17 +60,13 @@ ABA and 52 state bankers associations urged the Treasury Department to uphold th
 Compliance and Risk
 November 4, 2025
 The CFPB's procedures for securing its information systems have deteriorated in recent months, and the issue has been made worse by the loss of contractor resources and bureau personnel, according to a recent audit by the Federal Reserve...
-###  BIS urges central banks to reconsider approach to AI
-Compliance and Risk
-November 3, 2025
-Central banks and other supervisory and regulatory authorities need to “raise their game” both as observers of the effects of artificial intelligence on the economy and as users of the technology, according to a new report by the...
 ### NEWSBYTES
-###  ABA, associations welcome deal to end government shutdown
-November 10, 2025
-###  FHFA nearing deal to use new FICO credit scoring model for mortgages
-November 10, 2025
-###  Senate takes first step to end government shutdown
-November 9, 2025
+###  Ag lenders signal cautious outlook for farm profitability in 2025
+November 12, 2025
+###  Atlanta Fed’s Bostic to retire
+November 12, 2025
+###  DOJ: Congress, not Fed, must fund CFPB
+November 11, 2025
 ### SPONSORED CONTENT
 ###  Seeing More Check Fraud and Scams? These Educational Online Toolkits Can Help
 November 1, 2025

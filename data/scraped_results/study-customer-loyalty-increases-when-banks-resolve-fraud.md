@@ -1,13 +1,15 @@
 September 26, 2025
-November 10, 2025
-November 10, 2025
-November 9, 2025
-November 7, 2025
-November 7, 2025
-November 7, 2025
-November 10, 2025
-November 10, 2025
-November 9, 2025
+November 12, 2025
+November 12, 2025
+November 12, 2025
+November 11, 2025
+November 11, 2025
+###  NFIB Small Business Optimism Index edged down by 0.6 points in October to 98.2
+November 11, 2025
+The NFIB Small Business Optimism Index declined 0.6 points in October to 98.2 but remained above its 52-year average of 98. The NFIB uncertainty index fell 12 points from September to 88.
+November 12, 2025
+November 12, 2025
+November 11, 2025
 November 1, 2025
 ###  5 FedNow®  Service Developments You May Have Missed
 October 31, 2025
@@ -25,37 +27,37 @@ Vamsi Kanuri, co-author of the paper and an associate professor of marketing at 
 “After all, fraud is a serious violation of trust, and you would think it would automatically push customers closer to the exit,” he said. “Yet we show the opposite in cases of correct attribution: Not only do customers stay, but they also display higher levels of loyalty than those untouched by fraud. This is a real-world demonstration of the service recovery paradox, where effective handling of a failure can make customers more loyal than if no problem had occurred.”
 Tags: Customer engagementCustomer loyaltyCustomer retentionFraudScams
 ### Related Posts
-###  ABA, associations welcome deal to end government shutdown
+###  Ag lenders signal cautious outlook for farm profitability in 2025
+Ag Banking
+November 12, 2025
+Agricultural lenders report signs of tighter conditions in farm profitability and credit quality in 2025, according to a joint survey conducted by ABA and Farmer Mac.
+###  Atlanta Fed’s Bostic to retire
+Economy
+November 12, 2025
+Raphael Bostic, president and CEO of the Federal Reserve Bank of Atlanta, announced that he will step down from his position at the end of his term early next year.
+###  ABA Fraudcast: The bank that breaks the spell
+Compliance and Risk
+November 12, 2025
+Santander UK’s scam-interruption team confronts delicate issues customers in difficult moments.
+###  DOJ: Congress, not Fed, must fund CFPB
+Legal
+November 11, 2025
+The CFPB will exhaust its currently available funding early next year, and the bureau cannot withdraw funds from the Federal Reserve without a congressional appropriation, according to a recent memo by the U.S. Department of Justice.
+###  Banking on service
 Community Banking
-November 10, 2025
-Proposed deal also would reverse the Trump administration's decision to lay off more than 4,000 federal employees, including at the CDFI Fund.
-###  FHFA nearing deal to use new FICO credit scoring model for mortgages
-Mortgage
-November 10, 2025
-The Federal Housing Finance Agency is currently reviewing a possible deal with FICO to implement the FICO 10T credit scoring model for mortgages, according to a post on X by FHFA Director Bill Pulte.
-###  Senate takes first step to end government shutdown
-Newsbytes
-November 9, 2025
-The Senate cleared a key procedural hurdle needed to end the government shutdown after several Democrats reached a funding deal with Republicans.
-###  Former Trump adviser warns against credit card interest rate cap
-Newsbytes
-November 7, 2025
-A proposal to create a nationwide cap on credit card interest rates would hurt millions of Americans by cutting off access to credit, President Trump’s former campaign adviser Steve Moore said in a new report.
-###  Fed’s Miran: Stablecoins pose little risk to bank deposits
+November 11, 2025
+Serving the military and veteran community with financial services.
+###  NFIB Small Business Optimism Index edged down by 0.6 points in October to 98.2
 Economy
-November 7, 2025
-Passage of a new regulatory framework for stablecoins likely won’t lead to a flood of bank customers pulling their money out of deposit accounts and into the digital currency, Federal Reserve Governor Stephen Miran said.
-###  Fed: Policy uncertainty, AI sentiment pose financial stability risks
-Economy
-November 7, 2025
-Policy uncertainty remains a top risk to U.S. financial stability, with public sentiment about artificial intelligence emerging as another risk, according to the Federal Reserve’s most recent Financial Stability Report.
+November 11, 2025
+The NFIB Small Business Optimism Index declined 0.6 points in October to 98.2 but remained above its 52-year average of 98. The NFIB uncertainty index fell 12 points from September to 88.
 ### NEWSBYTES
-###  ABA, associations welcome deal to end government shutdown
-November 10, 2025
-###  FHFA nearing deal to use new FICO credit scoring model for mortgages
-November 10, 2025
-###  Senate takes first step to end government shutdown
-November 9, 2025
+###  Ag lenders signal cautious outlook for farm profitability in 2025
+November 12, 2025
+###  Atlanta Fed’s Bostic to retire
+November 12, 2025
+###  DOJ: Congress, not Fed, must fund CFPB
+November 11, 2025
 ### SPONSORED CONTENT
 ###  Seeing More Check Fraud and Scams? These Educational Online Toolkits Can Help
 November 1, 2025

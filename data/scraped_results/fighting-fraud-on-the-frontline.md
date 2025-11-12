@@ -4,15 +4,15 @@ Frontline staff are often the first line of defense for banks, but communication
 Frontline staff are often the first line of defense for banks, but communications barriers and a general lack of awareness about warning signs mean consumer complaints suggesting fraud may not reach the people who monitor such things.
 One struggle for banks is that staff turnover is greatest on the frontline, so training is a continuous education process. Gliha suggests creating resources such as videos and checklists that staff can easily access and reference to quickly identify and respond to fraud. But given how busy frontline staff are, she says that an in-person approach may work best, so she advises weekly meetings or short huddles with staff on what they should look out for.
 “Make it real so they are sensitive to it because you can get a little calloused over time: ‘Well, everybody’s fallen victim.’ You can’t do that when you’re face to face with somebody, and it may be their first or 10th time, but it is a very real crisis for them,” she says.
+November 12, 2025
+November 11, 2025
+November 11, 2025
 November 10, 2025
 November 6, 2025
 November 6, 2025
-November 5, 2025
-November 5, 2025
-November 5, 2025
-November 10, 2025
-November 10, 2025
-November 9, 2025
+November 12, 2025
+November 12, 2025
+November 11, 2025
 November 1, 2025
 ###  5 FedNow®  Service Developments You May Have Missed
 October 31, 2025
@@ -68,6 +68,18 @@ Tags: Customer communicationsCustomersFraudRisk management
 ###  Walt Williams 
 Walt Williams is senior editor of ABA Banking Journal. 
 ### Related Posts
+###  ABA Fraudcast: The bank that breaks the spell
+Compliance and Risk
+November 12, 2025
+Santander UK’s scam-interruption team confronts delicate issues customers in difficult moments.
+###  Banking on service
+Community Banking
+November 11, 2025
+Serving the military and veteran community with financial services.
+###  Survey: Most consumers would try stablecoins if offered by banks
+Newsbytes
+November 11, 2025
+Nearly three in four consumers are open to trying stablecoins and other digital currency services if offered by their primary bank, compared to just 3.6% who would feel comfortable using unregulated providers, according to a new survey.
 ###  Chair’s View: Forging ahead toward banking’s bright future
 Community Banking
 November 10, 2025
@@ -80,25 +92,13 @@ Economic historian John Steele Gordon and editor-in-chief Evan Sparks discuss ho
 Community Banking
 November 6, 2025
 Congress should repeal Section 29 of the Federal Deposit Insurance Act and replace it with a targeted asset-growth restriction for troubled banks. 
-###  Fed finalizes revisions to rating system for large banks
-Compliance and Risk
-November 5, 2025
-The Federal Reserve finalized revisions to its supervisory rating framework for large banks to address the “well managed” status of the institutions.
-###  ABA, associations share recommendations for implementing Genius Act
-Compliance and Risk
-November 5, 2025
-As the Treasury Department crafts regulations to implement the Genius Act, it should seek to preserve the benefits of payment stablecoins without causing unnecessary risks for customers, credit availability and financial stability, ABA and four associations said in...
-###  Survey: Most consumers uncomfortable talking about finances
-Financial Education
-November 5, 2025
-A new survey found that when talking to friends or family, most people find it easier to discuss politics or their love life than their bank accounts.
 ### NEWSBYTES
-###  ABA, associations welcome deal to end government shutdown
-November 10, 2025
-###  FHFA nearing deal to use new FICO credit scoring model for mortgages
-November 10, 2025
-###  Senate takes first step to end government shutdown
-November 9, 2025
+###  Ag lenders signal cautious outlook for farm profitability in 2025
+November 12, 2025
+###  Atlanta Fed’s Bostic to retire
+November 12, 2025
+###  DOJ: Congress, not Fed, must fund CFPB
+November 11, 2025
 ### SPONSORED CONTENT
 ###  Seeing More Check Fraud and Scams? These Educational Online Toolkits Can Help
 November 1, 2025

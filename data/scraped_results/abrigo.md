@@ -12,7 +12,13 @@ June 16, 2025
 May 06, 2025
 March 20, 2025
 # Media player
-0:00Speed: 1x
+PlayRestartRewindForward
+Volume
+70%
+70%, Click to access volume slider
+SlowerFasterTurn on descriptions
+PreferencesFullscreen
+0:00 / 1:14Speed: 1x
 1:13
 Video
 ### Abrigo Fraud Detection - Find fraud faster
@@ -24,6 +30,7 @@ Learn More
 Financial institutions must take calculated risks to drive growth, and small business lending presents a unique opportunity to expand market reach. However, creating new loan policies and processes can be challenging for banks and credit unions who haven’t focused on this sector before or are automating small business lending for the first time. A structured approach to preparing for small business lending will enhance efficiency, mitigate risk, and drive successful implementation.
 Learn More
 ## Insights from this Partner
+  * Regulatory expectations: What you need to know now
   * Evolving AML/CFT threats: What to watch for in 2026
   * Rethink asset/liability management: From static snapshots to strategic forecasting
   * Driving Insights with CECL: Leveraging Economic Stress Testing Tools

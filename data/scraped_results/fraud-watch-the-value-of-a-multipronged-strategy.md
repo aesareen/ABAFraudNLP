@@ -1,14 +1,14 @@
 July 8, 2025
 With more than one in three Americans having experienced financial fraud or a scam since January 2024 — 37% of whom have lost money — fraud has become pervasive.
+November 12, 2025
+November 11, 2025
 November 10, 2025
 November 6, 2025
 November 6, 2025
 November 5, 2025
-November 5, 2025
-November 5, 2025
-November 10, 2025
-November 10, 2025
-November 9, 2025
+November 12, 2025
+November 12, 2025
+November 11, 2025
 November 1, 2025
 ###  5 FedNow®  Service Developments You May Have Missed
 October 31, 2025
@@ -50,6 +50,14 @@ Tags: Financial crimesFinancial educationFraudHuman resources
 ###  Khalil Garriott 
 Khalil Garriott is executive editor of the ABA Banking Journal. 
 ### Related Posts
+###  ABA Fraudcast: The bank that breaks the spell
+Compliance and Risk
+November 12, 2025
+Santander UK’s scam-interruption team confronts delicate issues customers in difficult moments.
+###  Banking on service
+Community Banking
+November 11, 2025
+Serving the military and veteran community with financial services.
 ###  Chair’s View: Forging ahead toward banking’s bright future
 Community Banking
 November 10, 2025
@@ -66,21 +74,13 @@ Congress should repeal Section 29 of the Federal Deposit Insurance Act and repla
 Compliance and Risk
 November 5, 2025
 The Federal Reserve finalized revisions to its supervisory rating framework for large banks to address the “well managed” status of the institutions.
-###  ABA, associations share recommendations for implementing Genius Act
-Compliance and Risk
-November 5, 2025
-As the Treasury Department crafts regulations to implement the Genius Act, it should seek to preserve the benefits of payment stablecoins without causing unnecessary risks for customers, credit availability and financial stability, ABA and four associations said in...
-###  Long-awaited ACRE Act boosts banks’ ag lending competitiveness
-Ag Banking
-November 5, 2025
-Anticipated Treasury guidance could broaden the impact of the law, which helped to educate Congress about ag producers’ needs.
 ### NEWSBYTES
-###  ABA, associations welcome deal to end government shutdown
-November 10, 2025
-###  FHFA nearing deal to use new FICO credit scoring model for mortgages
-November 10, 2025
-###  Senate takes first step to end government shutdown
-November 9, 2025
+###  Ag lenders signal cautious outlook for farm profitability in 2025
+November 12, 2025
+###  Atlanta Fed’s Bostic to retire
+November 12, 2025
+###  DOJ: Congress, not Fed, must fund CFPB
+November 11, 2025
 ### SPONSORED CONTENT
 ###  Seeing More Check Fraud and Scams? These Educational Online Toolkits Can Help
 November 1, 2025

@@ -1,4 +1,4 @@
-Tuesday, November 11th, 2025 
+Wednesday, November 12th, 2025 
 By Liz Carey |  October 21, 2025 |  Industry
 # Survey finds U.S. consumers trust banks over other industries for fraud protection
 By Liz Carey |  October 21, 2025 |  Industry
@@ -34,19 +34,19 @@ Check your inbox or spam folder now to confirm your subscription.
 
 
 #### Digital Currency
+  * Crypto fintech Ripple announces $500M strategic investment 
   * American Bankers Association urges Treasury to prohibit interest for payment stablecoins 
   * CSBS outlines policy recommendations for regulators on stablecoin deposits 
   * Attorneys general submit response to SEC request for information on cryptocurrency, digital assets 
   * BPI, The Clearing House Association offer recommendations on Bank Secrecy Act 
-  * CME Group introduces trading for Solana and XRP futures 
 
 
 #### Most Read Last 7 Days
-  * Big Lots changes tune about what drove its bankruptcy
   * First Citizens Bank to acquire 138 branches from BMO Bank
-  * Legislation would address protections around retirement savings
-  * First Financial acquires Westfield Bancorp
-  * ICBA applauds court decision to affirm Fed’s authority on master accounts
+  * Big Lots changes tune about what drove its bankruptcy
+  * CSBS outlines policy recommendations for regulators on stablecoin deposits
+  * Sens. Banks, Warren introduce bill to accelerate AI innovation in United States
+  * American Bankers Association urges Treasury to prohibit interest for payment stablecoins
 
 
   * Home
