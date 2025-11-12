@@ -35,15 +35,17 @@ def parse_result(markdown_content: str):
     date_lines = []
     months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
     result = lines
+    start_index = 0
     for i, line in enumerate(lines):
         if any(month in line.strip().lower() for month in months):
             date_lines.append(line)
             continue
         if line.strip().startswith('# '):
+            start_index = i
             result = lines[i:]
         # The minute we see this copyright sign, everything after this is absolutely useless, so we can stop
-        if '©' in line.strip() or "Privacy Preference Center" in line.strip():
-            result = date_lines + result
+        if '©' in line.strip() or "Privacy Preference Center" in line.strip() or "Sitemap" in line.strip():
+            result = lines[start_index:i]
             return '\n'.join(result)
     
     return '\n'.join(result)
