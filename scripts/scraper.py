@@ -12,27 +12,21 @@ def load_in_manual_sources(filepath):
 
 def extract_filename_from_url(url):
     """Extract a human-readable filename from a URL."""
-    # Parse the URL to get the path
     parsed = urlparse(url)
-    path = parsed.path.rstrip('/')  # Remove trailing slashes
+    path = parsed.path.rstrip('/')
     
-    # Get the last segment of the path
-    segments = [s for s in path.split('/') if s]  # Filter out empty segments
+    segments = [s for s in path.split('/') if s]
     
     if segments:
-        # Use the last segment as filename
         filename = segments[-1]
         
-        # If it looks like a file with extension, remove it
         if '.' in filename and not filename.startswith('.'):
             filename = filename.rsplit('.', 1)[0]
         
-        # Clean the filename - remove or replace invalid characters
         filename = re.sub(r'[<>:"/\\|?*]', '', filename)
         
         return filename if filename else 'index'
     
-    # Fallback: use domain name
     return parsed.netloc.replace('.', '_')
 
 
@@ -75,13 +69,13 @@ async def scrape_website(urls):
         excluded_tags = [],
         exclude_social_media_links = True,
         exclude_external_links = True,
-        page_timeout=60000,  # 60 seconds timeout
-        delay_before_return_html=2.0,  # Wait 2 seconds before extracting
+        page_timeout=60000, 
+        delay_before_return_html=2.0, 
     )
     
     successful = 0
     failed = 0
-    seen_filenames = {}  # Track filenames to handle duplicates
+    seen_filenames = {}
     
     async with AsyncWebCrawler() as crawler:
         async for result in await crawler.arun_many(
@@ -91,7 +85,6 @@ async def scrape_website(urls):
             if result.success:
                 print(f"[green]Successfully crawled: {result.url}[/green]")
                 
-                # Clean the markdown content               
                 base_filename = extract_filename_from_url(result.url)
                 
                 filename = base_filename
@@ -101,7 +94,6 @@ async def scrape_website(urls):
                 else:
                     seen_filenames[filename] = 0
 
-                # Clean out some of the junk from our result
                 result = parse_result(result.markdown)
                 
                 try:
