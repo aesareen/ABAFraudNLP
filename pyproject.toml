@@ -6,6 +6,9 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "crawl4ai>=0.7.6",
+    "litellm>=1.79.0",
+    "openai>=2.6.1",
+    "pocket-agent>=0.2.23",
     "polars>=1.33.1",
     "rich>=14.2.0",
     "scikit-learn>=1.7.2",
