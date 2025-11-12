@@ -42,7 +42,7 @@ def parse_result(markdown_content: str):
         if line.strip().startswith('# '):
             result = lines[i:]
         # The minute we see this copyright sign, everything after this is absolutely useless, so we can stop
-        if '©' in line.strip():
+        if '©' in line.strip() or "Privacy Preference Center" in line.strip():
             result = date_lines + result
             return '\n'.join(result)
     
