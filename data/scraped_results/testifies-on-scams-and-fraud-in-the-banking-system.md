@@ -1,4 +1,3 @@
-  * February 1, 2024
 # ABA Testifies at Senate Banking Committee Hearing on Scams and Fraud in the Banking System
 WASHINGTON — 
 The American Bankers Association testified today on banks’ extraordinary efforts to protect their customers from increasingly sophisticated fraud threats and shared ideas with lawmakers to bolster the fight against fraud. Paul Benda, ABA’s executive vice president of risk, fraud and cybersecurity testified on behalf of ABA before the Senate Committee on Banking, Housing and Urban Affairs at a hearing titled, “Examining Scams and Fraud in the Banking System and Their Impact on Consumers.”
@@ -43,28 +42,3 @@ Want to be added to our news release list? Sign up here.
 Get ABA press releases via RSS.
 1333 New Hampshire Avenue NWWashington, DC 20036
 How to Contact ABA
-### Sitemap
-  * Topics
-  * Training & Events
-  * Experts & Peers
-  * News & Research
-  * Advocacy
-  * About Us
-  * Membership
-
-
-### Connect With Us
-  * Email Bulletins
-Follow ABA on Email Bulletins
-
-
-© 2025 American Bankers Association
-  * Shipping & Handling Rates
-  * Refund Policy
-  * Privacy Policy
-  * Terms of Service
-  * Accessibility Statement
-  * Press Room
-  * Site Sponsor
-
-

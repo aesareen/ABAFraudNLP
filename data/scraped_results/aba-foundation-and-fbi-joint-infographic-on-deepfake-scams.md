@@ -1,6 +1,3 @@
-  * September 3, 2025
-The infographic highlights how AI-generated or manipulated media, including images, video and audio, can be used to impersonate trusted individuals. Criminals may pose as loved ones, government officials, law enforcement personnel or even celebrities, often using fear and urgency to convince victims to send money or share sensitive information. 
-This infographic is the newest addition to ABA and the ABA Foundation’s suite of consumer education and fraud prevention resources. As a part of this broader effort, ABA will relaunch its free #BanksNeverAskThat and #PracticeSafeChecks public awareness campaigns in October, which use attention-grabbing humor and other engaging content to educate consumers about the persistent and growing threat of scams and check fraud, respectively. The ABA Foundation also offers its Safe Banking for Seniors program, which provides bankers with free tools and resources to help educate seniors and caregivers on how to prevent elder financial fraud. 
 # ABA Foundation and FBI Release New Infographic to Help Americans Spot and Avoid Deepfake Scams
 WASHINGTON — 
 As artificial intelligence (AI) continues to evolve, so do the tactics of scammers who exploit this technology to deceive and defraud consumers. Today, the American Bankers Association Foundation and the Federal Bureau of Investigation released a new infographic aimed at educating the public about the growing threat of deepfake scams.
@@ -56,28 +53,3 @@ Want to be added to our news release list? Sign up here.
 Get ABA press releases via RSS.
 1333 New Hampshire Avenue NWWashington, DC 20036
 How to Contact ABA
-### Sitemap
-  * Topics
-  * Training & Events
-  * Experts & Peers
-  * News & Research
-  * Advocacy
-  * About Us
-  * Membership
-
-
-### Connect With Us
-  * Email Bulletins
-Follow ABA on Email Bulletins
-
-
-© 2025 American Bankers Association
-  * Shipping & Handling Rates
-  * Refund Policy
-  * Privacy Policy
-  * Terms of Service
-  * Accessibility Statement
-  * Press Room
-  * Site Sponsor
-
-

@@ -1,4 +1,3 @@
-  * Published October 29, 2024
 # 2024 Fraud Insights Report
   * Brought to you by NICE Actimize
   * Published October 29, 2024
@@ -21,28 +20,3 @@ NICE Actimize
 No results for undefined
 1333 New Hampshire Avenue NWWashington, DC 20036
 How to Contact ABA
-### Sitemap
-  * Topics
-  * Training & Events
-  * Experts & Peers
-  * News & Research
-  * Advocacy
-  * About Us
-  * Membership
-
-
-### Connect With Us
-  * Email Bulletins
-Follow ABA on Email Bulletins
-
-
-© 2025 American Bankers Association
-  * Shipping & Handling Rates
-  * Refund Policy
-  * Privacy Policy
-  * Terms of Service
-  * Accessibility Statement
-  * Press Room
-  * Site Sponsor
-
-
