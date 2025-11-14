@@ -60,88 +60,40 @@ json_schemas = {
 
 
 def load_in_manual_sources(filepath):
-    with open(filepath, 'r') as file:
+    with open(filepath, "r") as file:
         return [line.strip() for line in file.readlines()]
+
 
 def extract_filename_from_url(url):
     """Extract a human-readable filename from a URL."""
     parsed = urlparse(url)
-    path = parsed.path.rstrip('/')
-    
-    segments = [s for s in path.split('/') if s]
-    
+    path = parsed.path.rstrip("/")
+
+    segments = [s for s in path.split("/") if s]
+
     if segments:
         filename = segments[-1]
-        
-        if '.' in filename and not filename.startswith('.'):
-            filename = filename.rsplit('.', 1)[0]
-        
-        filename = re.sub(r'[<>:"/\\|?*]', '', filename)
-        
-        return filename if filename else 'index'
-    
-    return parsed.netloc.replace('.', '_')
 
+        if "." in filename and not filename.startswith("."):
+            filename = filename.rsplit(".", 1)[0]
 
-def parse_result(markdown_content: str):
-    lines = markdown_content.split('\n')
-    date_lines = []
-    months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
-    result = lines
-    start_index = 0
-    for i, line in enumerate(lines):
-        if any(month in line.strip().lower() for month in months):
-            date_lines.append(line)
-            continue
-        if line.strip().startswith('# '):
-            start_index = i
-            result = lines[i:]
-        # The minute we see this copyright sign, everything after this is absolutely useless, so we can stop
-        if '©' in line.strip() or "Privacy Preference Center" in line.strip() or "Sitemap" in line.strip():
-            result = lines[start_index:i]
-            return '\n'.join(result)
-    
-    return '\n'.join(result)
+        filename = re.sub(r'[<>:"/\\|?*]', "", filename)
 
+        return filename if filename else "index"
 
-async def scrape_website(urls):
-    config = CrawlerRunConfig(
-        verbose=True,
-        stream=True,
-        cache_mode=CacheMode.BYPASS,
-        markdown_generator=DefaultMarkdownGenerator(
-            options = {
-                "ignore_links": True,
-                "ignore_images": True,
-                "skip_internal_links": True,
-            },
-            content_filter = PruningContentFilter(
-                threshold=0.80,
-                threshold_type="dynamic",
-                min_word_threshold=0
-        ), 
-        ),
-        excluded_tags = [],
-        exclude_social_media_links = True,
-        exclude_external_links = True,
-        page_timeout=60000, 
-        delay_before_return_html=2.0, 
-    )
-    
+    return parsed.netloc.replace(".", "_")
+
+async def scrape_website(urls, config):
+    seen_filenames = {}
     successful = 0
     failed = 0
-    seen_filenames = {}
-    
     async with AsyncWebCrawler() as crawler:
-        async for result in await crawler.arun_many(
-            urls=urls,
-            config=config
-        ):
+        async for result in await crawler.arun_many(urls=urls, config=config):
             if result.success:
                 print(f"[green]Successfully crawled: {result.url}[/green]")
-                
+
                 base_filename = extract_filename_from_url(result.url)
-                
+
                 filename = base_filename
                 if filename in seen_filenames:
                     seen_filenames[filename] += 1
@@ -149,7 +101,6 @@ async def scrape_website(urls):
                 else:
                     seen_filenames[filename] = 0
 
-                result = parse_result(result.markdown)
                 json_result = json.loads(result.extracted_content)
 
                 # Sometimes articles say "For Immediate Release", and we don't really care for that, so we can overwrite the field with the actual date
@@ -182,10 +133,13 @@ async def scrape_website(urls):
                 )
 
                 json_result[0]["source_url"] = result.url
+
+                markdown_result = result.markdown.fit_markdown # get the markdown only for the target elements
+
                 try:
-                    filepath = f"data/scraped_results/{filename}.md"
-                    with open(filepath, "w", encoding='utf-8') as file:
-                        file.write(result)
+                    filepath = f"data/scraped_markdown_results/{filename}.md"
+                    with open(filepath, "w", encoding="utf-8") as file:
+                        file.write(markdown_result)
                     print(f"  → Saved as: [cyan]{filename}.md[/cyan]")
                     with open(
                         f"data/scraped_json_results/{filename}.json",
@@ -203,8 +157,7 @@ async def scrape_website(urls):
                 print(f"Error: {result.error_message}")
                 print("---")
                 failed += 1
-                
-    
+
     print(f"\n[blue]Summary: {successful} successful, {failed} failed[/blue]")
     return True
 
