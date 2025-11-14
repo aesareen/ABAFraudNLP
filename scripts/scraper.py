@@ -110,14 +110,14 @@ async def scrape_website(urls, config):
                 ):
                     json_result[0]["date_published"] = json_result[0]["date_published"][
                         1
-                    ]["date"]
+                    ]["date"].split("Published ")[-1].strip()
                 elif (
                     isinstance(json_result[0]["date_published"], list)
                     and len(json_result[0]["date_published"]) == 1
                 ):
                     json_result[0]["date_published"] = json_result[0]["date_published"][
                         0
-                    ]["date"]
+                    ]["date"].split("Published ")[-1].strip()
                 elif isinstance(
                     json_result[0]["date_published"], str
                 ):  # This is for journal ABA
