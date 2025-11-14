@@ -1,0 +1,11 @@
+# Understanding Fraud Schemes and Scams
+* Published March 12, 2025
+From virtual kidnapping to other cyber-enabled scams, fraud is constantly evolving. As the industry implements controls to protect against traditional first-party and account takeover fraud, criminals have adjusted their strategies to manipulate your customers into helping facilitate the attack. It is critical to understand the key components of fraud scams, such as victimology, key indicators and opportunities for mitigating risk.
+This essential eBook, updated for Q1 2025 based on U.S. federal agency sources and decades of experience in financial crime management, is designed to help you identify the characteristics of common fraud scams — from authorized push payment fraud, to elder and health scams.
+### Highlights include:
+  * Fraud scam types and information about who is at risk.
+  * Details on the stages of each scam.
+  * Key indicators and insights to mitigate risk.
+  * A convenient one-page Quick Reference Guide to print and share with front-line staff.
+
+

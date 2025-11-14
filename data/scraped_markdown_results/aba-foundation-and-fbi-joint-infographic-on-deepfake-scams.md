@@ -1,0 +1,27 @@
+# ABA Foundation and FBI Release New Infographic to Help Americans Spot and Avoid Deepfake Scams
+* For Immediate Release
+* September 3, 2025
+As artificial intelligence (AI) continues to evolve, so do the tactics of scammers who exploit this technology to deceive and defraud consumers. Today, the American Bankers Association Foundation and the Federal Bureau of Investigation released a new infographic aimed at educating the public about the growing threat of deepfake scams.
+The infographic highlights how AI-generated or manipulated media, including images, video and audio, can be used to impersonate trusted individuals. Criminals may pose as loved ones, government officials, law enforcement personnel or even celebrities, often using fear and urgency to convince victims to send money or share sensitive information. 
+According to the FBI, more than 4.2 million fraud reports have been filed since 2020, resulting in over $50.5 billion in losses, with a growing portion stemming from deepfake scams. 
+“Deepfakes are becoming increasingly sophisticated and harder to detect,” said Sam Kunjukunju, vice president of consumer education for the ABA Foundation. “This infographic provides practical tips to help consumers recognize red flags and protect themselves from these deceptive schemes. We are grateful to the FBI for their help in raising awareness about these scams.”
+“The FBI continues to see a troubling rise in fraud reports involving deepfake media,” said FBI Criminal Investigative Division Assistant Director Jose A. Perez. “Educating the public about this emerging threat is key to preventing these scams and minimizing their impact. We encourage consumers to stay informed and share what they learn with friends and family so they can spot deepfakes before they do any harm. Our partnership with the ABA Foundation reflects a shared commitment to protecting consumers and advancing this important public awareness effort.”
+The infographic outlines key signs of deepfake media, including:
+  * Blurry or distorted facial features;
+  * Unnatural blinking or facial movements;
+  * Audio-video mismatches;
+  * Flat or robotic voice tones; and
+  * Odd lighting or shadows. 
+
+
+It also offers actionable tips to stay safe:
+  * **Stop and think** before responding to urgent or emotional requests. 
+  * **Verify identities** using trusted sources and reverse search tools.
+  * **Create codewords** with loved ones to confirm authenticity.
+  * **Limit your digital footprint** to reduce exposure.
+  * **Report scams** to the FBI at IC3.gov, your bank, and local law enforcement. 
+
+
+This infographic is the newest addition to ABA and the ABA Foundation’s suite of consumer education and fraud prevention resources. As a part of this broader effort, ABA will relaunch its free #BanksNeverAskThat and #PracticeSafeChecks public awareness campaigns in October, which use attention-grabbing humor and other engaging content to educate consumers about the persistent and growing threat of scams and check fraud, respectively. The ABA Foundation also offers its Safe Banking for Seniors program, which provides bankers with free tools and resources to help educate seniors and caregivers on how to prevent elder financial fraud. 
+To view the infographic and learn more, visit aba.com/DeepFakes. 
+All inquiries from the press can be directed to one of our press contacts.Hi-Res photos for use by the press.Getting the industry's message out – in print and on the air – about banks' health and lending, as well as policies that are harmful to economic recovery.Complimentary press registrations are available for select events.Want to be added to our news release list? Sign up here.Get ABA press releases via RSS.

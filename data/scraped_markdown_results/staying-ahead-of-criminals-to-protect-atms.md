@@ -1,0 +1,31 @@
+# Staying ahead of criminals to protect ATMs
+October 27, 2025 November 13, 2025 November 13, 2025 November 12, 2025 November 12, 2025 November 12, 2025 November 12, 2025 November 13, 2025 November 13, 2025 November 13, 2025 November 1, 2025 October 31, 2025 October 20, 2025 October 1, 2025 November 6, 2025 October 23, 2025 October 16, 2025
+**By Heather Wyson-Constantine**
+The ease in which bank customers can access their money and account information at automated teller machines also benefits cyber criminals who target ATMs to steal money. ABA convened a series of webinars in September on ATM security for members to hear from major ATM service providers – Diebold Nixdorf, NCR Atleos and Hysoung – about common and evolving attack methods, including:
+  * **ATM jackpotting.** Criminal actors gain physical access to the ATM and download malware or install unauthorized devices to control the ATM’s cash dispense function or spoof the acquirer’s host system response, thereby allowing the criminals to withdraw unlimited amounts of cash.
+  * **ATM shimming.** A slim device containing a microprocessor and flash memory inserted into an ATM’s card reader to intercept or manipulate data passing between a payment card’s EMV/micro-chip and the ATM’s chip interface.
+  * **ATM skimming**. Criminal actors attach a scanning device onto the ATM card reader slot and cameras in or around the machine to record account details from a payment card’s magnetic strip. Once the information is captured, criminals use the details to create a cloned card.
+  * **Burglaries and larcenies.** Attempts to breach an ATM’s safe on site or at a secondary location using methods such as brute force, explosives or hook and chains.
+  * **Cash trapping**. A contraption inserted into the cash-dispensing slot that blocks an ATM’s shutter so that bills cannot be presented to the customer. The criminal retrieves the cash once the customer leaves.
+  * **Robberies of ATMs servicers and technicians.** Criminals tamper with an ATM, prompting a service call, or surveil technicians or CIT transporters, then ambush them while the ATM doors are open.
+
+
+An evolving type of tactic identified by all three presenters is direct memory access attacks, in which criminals exploit high-speed expansion ports to bypass the terminal’s security controls and gain access to or manipulate its memory. This allows the attacker to copy files, manipulate user passwords and execute foreign executables and payloads. While not yet widely seen in the United States, a DMA attack was reported in Mexico earlier this year that resulted in jackpotting.
+#### **Assessing and mitigating the risk**
+ATM crimes are often regional and conducted by organized and traveling groups. Engaging with local and national law enforcement, industry groups and ATM manufacturers to share information about incidents can assist banks in identifying patterns and evolving tactics, techniques and procedures targeting ATMs and ATM networks.
+Leading information sharing groups include:
+  * **ATM Crime Task Force**. This industry-led group is comprised of ATM and security subject matter experts from financial institutions and law enforcement agencies and was created to share tactical information about crime incidents impacting the industry.
+  * **ABA Physical Security Open Committee**. This group shares recommended practices, trend information and resources through calls open to all ABA bank members. It also serves as a channel for members to interact with peer institutions and provide input to ABA on needed resources and training.
+  * **Skimming and Payment Terminal Working Group**. SAPTA is comprised of public and private sector investigators from the International Association of Financial Crimes Investigators who discuss new trends, devices, techniques and case success stories involving payment terminal crimes and the criminal organizations behind them.
+
+
+ATM manufacturers are another important source of information on the types of attacks targeting ATMs and can recommend processes and procedures to defend against them. Banks should subscribe to any security-related alerts, blogs or portals offered by the manufacturers and alerts and engage directly with account managers to understand whether their ATMs are appropriately equipped to defend against the evolving threats.
+Mitigating threats to ATMs and those who use ATMs is an ongoing process. Closer coordination with law enforcement, particularly in high-risk regions, and more proactive intelligence and sharing through groups such as the ATM Crime Task Force, SAPTA and ABA can improve understanding and risk mitigation. For example, data reported to the ATM Crime Task Force indicates that ATM burglaries decreased 57 percent in 2025 while vendor robberies decreased 53 percent. These declines are encouraging and reflect the impact of several industry-wide efforts, including:
+  * Improved physical hardening of ATM enclosures and anchoring systems.
+  * Increased use of remote monitoring and AI-based surveillance analytics to detect tampering or loitering.
+  * Enhanced technician protocols, including randomized service schedules and dual-control procedures, which have helped reduce successful ambushes.
+
+
+Bankers can benefit from the expertise and experience of banking peers within ABA, law enforcement and ATM providers to increase awareness of and enhance protection from existing and evolving trends.
+To access the recordings from ABA ATM Security Trends and Mitigations Strategies webinar series, please visit https://www.aba.com/training-events/online-training/atm-security-trends-mitigation-strategies. For more information and resources, please contact Heather Wyson-Constantine, hwyson@aba.com.
+_Heather Wyson-Constantine is VP, cyber and physical security policy at ABA._

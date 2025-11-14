@@ -1,0 +1,7 @@
+# New survey: Fraud may be down but the stakes for financial institutions remain high
+* June 16, 2025 
+Fraud isn't only a risk to manage within financial institutions; it's quickly becoming one of the most critical tests of trust between banks and credit unions and their clients.
+As fraud continues to be a climbing concern at reported losses of $12.5 billion in 2024, consumer expectations for their financial institutions remain high.
+Abrigo recently conducted its second annual fraud survey to understand how fraud affects U.S. consumers and small businesses and what they expect from their financial institutions.
+The 2024 Abrigo State of Fraud report uncovered how prevalent fraud had become. Fast forward to 2025, and the picture has changed, but in ways that are just as concerning.
+According to the Abrigo State of Fraud report 2025, fewer people have experienced fraud this year, but the anxiety around it has grown, and so has the emotional fallout when it does happen. Here's a closer look at how the numbers have changed and what those shifts might mean for your bank or credit union.
