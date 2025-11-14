@@ -17,9 +17,22 @@ CLIENT: Client = create_client(url, key)
 
 def upload_to_supabase(json_content: dict):
     json_dict = json_content[0]
-    json_dict['created_at'] = datetime.now(timezone.utc).isoformat()
-    response = CLIENT.table("articles").insert(json_dict).execute()
-    return response.data
+    article_name = json_dict.get('name')
+
+    if not article_name:
+        raise ValueError("Article name is required")
+
+    # Check if article with this name already exists
+    existing = CLIENT.table("articles").select("*").eq("name", article_name).execute()
+
+    # If article exists, update it
+    if existing.data:
+        response = CLIENT.table("articles").update(json_dict).eq("name", article_name).execute()
+        return response.data, "updated"
+    else: # otherwise, insert it
+        json_dict['created_at'] = datetime.now(timezone.utc).isoformat()
+        response = CLIENT.table("articles").insert(json_dict).execute()
+        return response.data, "inserted"
 
 if __name__ == "__main__":
     # Load in all the JSON files in our data folder
@@ -29,9 +42,12 @@ if __name__ == "__main__":
             with open(file, "r", encoding="utf-8") as f:
                 json_content = json.load(f)
             try:
-                response = upload_to_supabase(json_content)
-                print(f"[green]Successfully uploaded {file} to Supabase[/green]")
+                response, operation = upload_to_supabase(json_content)
+                print(f"[green]Successfully {operation} {file} to Supabase[/green]")
             except APIError as e:
                 print(f"[red]Failed to upload {file} to Supabase[/red]")
                 print(f"Error: {e}")
+                continue
+            except ValueError as e:
+                print(f"[red]Validation error for {file}: {e}[/red]")
                 continue
