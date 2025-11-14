@@ -1,10 +1,63 @@
 import asyncio
-from crawl4ai import AsyncWebCrawler, CrawlerRunConfig, CacheMode
+import json
+from crawl4ai import (
+    AsyncWebCrawler,
+    CrawlerRunConfig,
+    CacheMode,
+    JsonCssExtractionStrategy,
+)
 from crawl4ai.markdown_generation_strategy import DefaultMarkdownGenerator
 from crawl4ai.content_filter_strategy import PruningContentFilter
 from rich import print
 from urllib.parse import urlparse
 import re
+
+json_schemas = {
+    "website": {
+        "name": "Article",
+        "baseSelector": "body",
+        "fields": [
+            {
+                "name": "article_name",
+                "selector": "h1",
+                "type": "text",
+            },
+            {
+                "name": "date_published",
+                "selector": "ul.unlisted li.byline__inline",
+                "type": "list",
+                "fields": [{"name": "date", "type": "text"}],
+            },
+            {
+                "name": "raw_content",
+                "selector": "span.rich-text",
+                "type": "text",
+            },
+        ],
+    },
+    "journal": {
+        "name": "Journal",
+        "baseSelector": "div.post-wrapper",
+        "fields": [
+            {
+                "name": "article_name",
+                "selector": "h1.jeg_post_title",
+                "type": "text",
+            },
+            {
+                "name": "date_published",
+                "selector": "div.jeg_meta_date a:nth-of-type(1)",
+                "type": "text",
+            },
+            {
+                "name": "raw_content",
+                "selector": "div.entry-content",
+                "type": "text",
+            },
+        ],
+    },
+}
+
 
 def load_in_manual_sources(filepath):
     with open(filepath, 'r') as file:
@@ -97,12 +150,50 @@ async def scrape_website(urls):
                     seen_filenames[filename] = 0
 
                 result = parse_result(result.markdown)
-                
+                json_result = json.loads(result.extracted_content)
+
+                # Sometimes articles say "For Immediate Release", and we don't really care for that, so we can overwrite the field with the actual date
+                if (
+                    isinstance(json_result[0]["date_published"], list)
+                    and len(json_result[0]["date_published"]) > 1
+                ):
+                    json_result[0]["date_published"] = json_result[0]["date_published"][
+                        1
+                    ]["date"]
+                elif (
+                    isinstance(json_result[0]["date_published"], list)
+                    and len(json_result[0]["date_published"]) == 1
+                ):
+                    json_result[0]["date_published"] = json_result[0]["date_published"][
+                        0
+                    ]["date"]
+                elif isinstance(
+                    json_result[0]["date_published"], str
+                ):  # This is for journal ABA
+                    json_result[0]["date_published"] = json_result[0]["date_published"]
+                else:
+                    json_result[0]["date_published"] = None
+
+                # Sometimes there is weird unicode characters in our raw content, so we can convert to ASCII and then convert back to get rid of them
+                json_result[0]["raw_content"] = (
+                    json_result[0]["raw_content"]
+                    .encode("ascii", "ignore")
+                    .decode("ascii")
+                )
+
+                json_result[0]["source_url"] = result.url
                 try:
                     filepath = f"data/scraped_results/{filename}.md"
                     with open(filepath, "w", encoding='utf-8') as file:
                         file.write(result)
                     print(f"  → Saved as: [cyan]{filename}.md[/cyan]")
+                    with open(
+                        f"data/scraped_json_results/{filename}.json",
+                        "w",
+                        encoding="utf-8",
+                    ) as file:
+                        json.dump(json_result, file, indent=4)
+                    print(f"  → Saved as: [cyan]{filename}.json[/cyan]")
                     successful += 1
                 except Exception as e:
                     print(f"[red]Error saving {result.url}: {e}[/red]")
@@ -115,16 +206,87 @@ async def scrape_website(urls):
                 
     
     print(f"\n[blue]Summary: {successful} successful, {failed} failed[/blue]")
-    return True  
+    return True
+
+
+async def scrape_aba_website(urls):
+    config = CrawlerRunConfig(
+        verbose=True,
+        stream=True,
+        cache_mode=CacheMode.BYPASS,
+        target_elements = [field['selector'] for field in json_schemas["website"]["fields"]],
+        extraction_strategy=JsonCssExtractionStrategy(
+            schema=json_schemas["website"], verbose=True
+        ),
+        markdown_generator=DefaultMarkdownGenerator(
+            options={
+                "ignore_links": True,
+                "ignore_images": True,
+                "skip_internal_links": True,
+            },
+            content_filter=PruningContentFilter(
+                threshold=0.80, threshold_type="dynamic", min_word_threshold=0
+            ),
+        ),
+        excluded_tags=[],
+        exclude_social_media_links=True,
+        exclude_external_links=True,
+        page_timeout=60000,
+        delay_before_return_html=2.0,
+    )
+
+    return await scrape_website(urls, config)
+
+
+async def scrape_aba_journal(urls):
+    config = CrawlerRunConfig(
+        verbose=True,
+        stream=True,
+        cache_mode=CacheMode.BYPASS,
+        target_elements = [field['selector'] for field in json_schemas["journal"]["fields"]],
+        extraction_strategy=JsonCssExtractionStrategy(schema=json_schemas["journal"]),
+        markdown_generator=DefaultMarkdownGenerator(
+            options={
+                "ignore_links": True,
+                "ignore_images": True,
+                "skip_internal_links": True,
+            },
+            content_filter=PruningContentFilter(
+                threshold=0.80, threshold_type="dynamic", min_word_threshold=0
+            ),
+        ),
+        excluded_tags=[],
+        exclude_social_media_links=True,
+        exclude_external_links=True,
+        page_timeout=60000,
+        delay_before_return_html=2.0,
+    )
+
+    return await scrape_website(urls, config)
+
 
 async def main():
-    urls = load_in_manual_sources('data/manual_search.txt')
-    print(f"[blue]Scraping {len(urls)} URLs[/blue]")
-    success = await scrape_website(urls)
+    urls = load_in_manual_sources("data/manual_search.txt")
+    website_urls = []
+    journal_urls = []
+    for url in urls:
+        if url.startswith("https://bankingjournal.aba.com"):
+            journal_urls.append(url)
+        else:
+            website_urls.append(url)
+    print(f"[blue]Scraping {len(website_urls)} website URLs[/blue]")
+    success = await scrape_aba_website(website_urls)
     if success:
-        print("[green]Scraping completed successfully[/green]")
+        print("[green]Website scraping completed successfully[/green]")
     else:
-        print("[red]Scraping failed[/red]")    
+        print("[red]Website scraping failed[/red]")
+    print(f"[blue]Scraping {len(journal_urls)} journal URLs[/blue]")
+    success = await scrape_aba_journal(journal_urls)
+    if success:
+        print("[green]Journal scraping completed successfully[/green]")
+    else:
+        print("[red]Journal scraping failed[/red]")
+
 
 if __name__ == "__main__":
     asyncio.run(main())
