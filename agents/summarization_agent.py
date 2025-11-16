@@ -4,10 +4,14 @@ import logging
 import os
 import asyncio
 from logging import getLogger, basicConfig, INFO
-from prompts import prompt_templates, KeywordList
+from prompts import prompt_templates, KeywordList, ListOfKeywords
+from scripts.upload_to_supabase import upload_keywords_to_supabase
 from typing import Any
 from dotenv import load_dotenv
+from rich import print
 import copy
+import glob
+import json
 
 project_root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 
@@ -155,6 +159,15 @@ class SummarizationAgent(PocketAgent):
 
             print(f"\nExtracted Keywords:\n{response_json.model_dump_json(indent=2)}\n")
 
+    async def generate_article_keywords(self, article: str, previous_extracted_keywords: list[str] = []):
+        if len(previous_extracted_keywords):
+            await self.add_user_message(f"Context: Previously extracted keywords: {', '.join(previous_extracted_keywords)}")
+        
+        formatted_prompt = prompt_templates["summarization_agent"]["extract_keywords_from_article"]["prompt"].format(article=article)
+        
+        response_json = await self.run(formatted_prompt, schema=ListOfKeywords, schema_name="ListOfKeywords")
+        return response_json.keywords
+
 
 def initialize_summarization_agent():
     """Initialize the summarization agent"""
@@ -196,11 +209,21 @@ def initialize_summarization_agent():
 async def main():
     summarization_agent = initialize_summarization_agent()
 
-    response = await summarization_agent.execute_user_input_loop(
-        schema=KeywordList, schema_name="KeywordList"
-    )
+    article_files = glob.glob(os.path.join(project_root, "data/scraped_json_results/*.json"))
+    keywords_dict = {}
+    keywords_list = []
+    for article_file in article_files:
+        with open(article_file, "r") as f:
+            article_data = json.load(f)
+            article_name = article_data[0]["article_name"]
+            article_content = article_data[0]["raw_content"]
+            response = await summarization_agent.generate_article_keywords(article_content, list(set(keywords_list)))
+            keywords_dict[article_name] = response 
+            keywords_list.extend(response)
 
-    print(response)
+    for article_name, keywords in keywords_dict.items():
+        upload_keywords_to_supabase(article_name, keywords)
+        print(f"[green]Successfully uploaded keywords for {article_name}[/green]")
 
 
 if __name__ == "__main__":

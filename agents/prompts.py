@@ -1,11 +1,12 @@
 from pydantic import BaseModel, Field
 
-class ArticleKeywords(BaseModel):
-    article: str = Field(description="The name of the article")
+class ListOfKeywords(BaseModel):
     keywords: list[str] = Field(description="A list of keywords extracted from the article")
 
 class KeywordList(BaseModel):
-    keywords: list[ArticleKeywords] = Field(description="A list of ArticleKeywords extracted from the articles")
+    article_name: str = Field(description="The name of the article")
+    keywords: ListOfKeywords
+
 
 tools: str = """
     - BM25: A tool that allows you to query a BM25 Index. This should be used for all keyword-based searches, while semantic searches should be done with the PGVectors Server.
@@ -19,6 +20,10 @@ prompt_templates: dict[str, dict[str, str]] = {
         },
         "extract_keywords_from_query": {
             "prompt": "Find the relevant articles based upon the following query and then extract the prominent keywords from each article. Ensure your keywords are just the most high-level, overall keywords that would likely apply to multiple articles. Do not include specific keywords that may be only true for a single article or a small subset of articles.: {query}",
+            "response_format": KeywordList
+        },
+        "extract_keywords_from_article": {
+            "prompt": "Extract the prominent keywords from the following article. Ensure your keywords are just the most high-level, overall keywords that would likely apply to multiple articles. Do not include specific keywords that may be only true for a single article or a small subset of articles. Limit your keywords to 3-5 primary keywords and prioritize previous keywords if they are applicable to the article. Do not use any tools for this. \n Article: {article}",
             "response_format": KeywordList
         }
     }
