@@ -15,7 +15,7 @@ load_dotenv(dotenv_path=os.path.join(project_root, "config/.env"), override=True
 BM25_INDEX_PATH: str = os.path.join(project_root, os.getenv("BM25_INDEX_PATH"))
 
 logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    level=logging.DEBUG, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
 LOGGER = logging.getLogger(__name__)
 
@@ -62,17 +62,18 @@ def get_or_create_bm25_index(documents: list[str], save: bool = False):
 
 
 # This is needed when we set up this as a MCP Server as we need to know where the project root is to access the data folder
+# TODO: lowkey would probably be better to use raw_content from JSON; you can get article names then too
 markdown_files = glob.glob(os.path.join(project_root, "data/scraped_markdown_results/*.md"))
 article_contents = []
 
-LOGGER.info("Loading articles...")
+LOGGER.debug("Loading articles...")
 for file in markdown_files:
     with open(file, "r", encoding="utf-8") as f:
         markdown_content = f.read()
     article_contents.append(markdown_content)
-LOGGER.info("Articles loaded successfully")
+LOGGER.debug("Articles loaded successfully")
 
-LOGGER.info("Creating BM25 Index...")
+LOGGER.debug("Creating BM25 Index...")
 
 BM25, tokenized_corpus = get_or_create_bm25_index(article_contents)
 
