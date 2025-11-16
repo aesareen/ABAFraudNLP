@@ -11,6 +11,7 @@ dependencies = [
     "pocket-agent>=0.2.23",
     "polars>=1.33.1",
     "python-dotenv>=1.2.1",
+    "rank-bm25>=0.2.2",
     "rich>=14.2.0",
     "scikit-learn>=1.7.2",
     "streamlit>=1.51.0",
