@@ -7,15 +7,25 @@ from datetime import datetime, timezone
 from rich import print
 from postgrest.exceptions import APIError
 from rich.progress import Progress
+from openai import OpenAI
 
-load_dotenv(dotenv_path="config/.env")
+load_dotenv(dotenv_path="config/.env", override=True)
 
 url: str = os.getenv("SUPABASE_URL")
 key: str = os.getenv("SUPABASE_KEY")
+openai_api_key: str = os.getenv("OPENAI_API_KEY")
 
 CLIENT: Client = create_client(url, key)
+OPENAI_CLIENT: OpenAI = OpenAI(api_key=openai_api_key)
 
-def upload_to_supabase(json_content: dict):
+def get_embeddings(text: str):
+    response = OPENAI_CLIENT.embeddings.create(
+        input=text,
+        model="text-embedding-3-small"
+    )
+    return response.data[0].embedding
+
+def upload_json_to_supabase(json_content: dict):
     json_dict = json_content[0]
     article_name = json_dict.get('name')
 
@@ -28,11 +38,30 @@ def upload_to_supabase(json_content: dict):
     # If article exists, update it
     if existing.data:
         response = CLIENT.table("articles").update(json_dict).eq("name", article_name).execute()
-        return response.data, "updated"
+        return response
     else: # otherwise, insert it
         json_dict['created_at'] = datetime.now(timezone.utc).isoformat()
         response = CLIENT.table("articles").insert(json_dict).execute()
+        return response
+
+def upload_embeddings_to_supabase(article_name: str, raw_content: str):
+    if not article_name:
+        raise ValueError("Article name is required")
+    if not raw_content:
+        raise ValueError("You must pass in some raw text content from an ABA article to get embeddings")
+    
+    # Check if article with this name already exists
+    existing_article = CLIENT.table("articles").select("*").eq("article_name", article_name).single().execute().data.get('article_id')
+    if existing_article:
+        response = CLIENT.table("article_embeddings").insert({
+            "article_id": existing_article,
+            "embedding": get_embeddings(raw_content)
+        }).execute()
         return response.data, "inserted"
+    else:
+        raise ValueError("Article not found")
+        
+    return response
 
 if __name__ == "__main__":
     # Load in all the JSON files in our data folder
@@ -42,8 +71,9 @@ if __name__ == "__main__":
             with open(file, "r", encoding="utf-8") as f:
                 json_content = json.load(f)
             try:
-                response, operation = upload_to_supabase(json_content)
-                print(f"[green]Successfully {operation} {file} to Supabase[/green]")
+                # upload_response = upload_json_to_supabase(json_content)
+                embedding_response = upload_embeddings_to_supabase(json_content[0]['article_name'], json_content[0]['raw_content'])
+                print(f"[green]Successfully uploaded {file} to Supabase[/green]")
             except APIError as e:
                 print(f"[red]Failed to upload {file} to Supabase[/red]")
                 print(f"Error: {e}")
