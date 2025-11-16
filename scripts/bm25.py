@@ -8,6 +8,7 @@ import string
 import glob
 from rich.progress import Progress
 from dotenv import load_dotenv
+import json
 
 project_root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 load_dotenv(dotenv_path=os.path.join(project_root, "config/.env"), override=True)
@@ -63,14 +64,16 @@ def get_or_create_bm25_index(documents: list[str], save: bool = False):
 
 # This is needed when we set up this as a MCP Server as we need to know where the project root is to access the data folder
 # TODO: lowkey would probably be better to use raw_content from JSON; you can get article names then too
-markdown_files = glob.glob(os.path.join(project_root, "data/scraped_markdown_results/*.md"))
+json_files = glob.glob(os.path.join(project_root, "data/scraped_json_results/*.json"))
 article_contents = []
 
 LOGGER.debug("Loading articles...")
-for file in markdown_files:
+for file in json_files:
     with open(file, "r", encoding="utf-8") as f:
-        markdown_content = f.read()
-    article_contents.append(markdown_content)
+        json_content = json.load(f)
+    text_content = json_content[0]["raw_content"]
+    text_content = "<article_name>" + json_content[0]["article_name"] + "</article_name>" + text_content
+    article_contents.append(text_content)
 LOGGER.debug("Articles loaded successfully")
 
 LOGGER.debug("Creating BM25 Index...")
@@ -103,17 +106,20 @@ def query_bm25_index(
         " "
     )
     # Get BM25 scores for all documents
-    scores = BM25.get_scores(tokenized_query)
-
-    # Get indices of top N documents sorted by score
-    top_indices = sorted(range(len(scores)), key=lambda i: scores[i], reverse=True)[:3]
+    top_n_articles = BM25.get_top_n(tokenized_query, article_contents, n=3)
 
     # Return the original article contents for the top N documents
-    top_documents = [article_contents[i] for i in top_indices]
+    print(f"Top n articles: {top_n_articles}")
+    top_documents = []
+    for article in top_n_articles:
+        article_name = article.split("<article_name>")[1].split("</article_name>")[0]
+        article_content = article.split("<article_name>")[1].split("</article_name>")[1]
+        top_documents.append({"article_name": article_name, "article_content": article_content})
+        
+    LOGGER.debug(f"Top documents: {top_documents}")
 
     return top_documents
 
 
 if __name__ == "__main__":
-    # We can load in the markdown files we got from Crawl4AI
     mcp_server.run(show_banner=False)
