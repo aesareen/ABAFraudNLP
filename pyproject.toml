@@ -10,6 +10,7 @@ dependencies = [
     "openai>=2.6.1",
     "pocket-agent>=0.2.23",
     "polars>=1.33.1",
+    "pydantic>=2.12.3",
     "python-dotenv>=1.2.1",
     "rank-bm25>=0.2.2",
     "rich>=14.2.0",

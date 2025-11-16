@@ -1,15 +1,23 @@
 from rank_bm25 import BM25Okapi
 import pickle
 import os
+from fastmcp import FastMCP
+from pydantic import Field
+import logging
 import string
 import glob
 from rich.progress import Progress
 from dotenv import load_dotenv
-from rich import print
 
-load_dotenv(dotenv_path="config/.env", override=True)
+project_root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+load_dotenv(dotenv_path=os.path.join(project_root, "config/.env"), override=True)
 
-BM25_INDEX_PATH: str = os.getenv("BM25_INDEX_PATH")
+BM25_INDEX_PATH: str = os.path.join(project_root, os.getenv("BM25_INDEX_PATH"))
+
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
+LOGGER = logging.getLogger(__name__)
 
 
 def create_bm25_index(documents: list[str], save: bool = False) -> BM25Okapi:
@@ -31,7 +39,7 @@ def create_bm25_index(documents: list[str], save: bool = False) -> BM25Okapi:
     if save:
         with open(BM25_INDEX_PATH, "wb") as f:
             pickle.dump(bm25, f)
-    return bm25
+    return bm25, tokenized_corpus
 
 
 def get_or_create_bm25_index(documents: list[str], save: bool = False):
@@ -48,43 +56,63 @@ def get_or_create_bm25_index(documents: list[str], save: bool = False):
         with open(BM25_INDEX_PATH, "rb") as f:
             bm25 = pickle.load(f)
     else:
-        bm25 = create_bm25_index(documents, save)
-    return bm25
+        bm25, tokenized_corpus = create_bm25_index(documents, save)
+    return bm25, tokenized_corpus
 
 
-def query_bm25_index(query: str, bm25: BM25Okapi, corpus: list[str], n: int = 3):
+
+# This is needed when we set up this as a MCP Server as we need to know where the project root is to access the data folder
+markdown_files = glob.glob(os.path.join(project_root, "data/scraped_markdown_results/*.md"))
+article_contents = []
+
+LOGGER.info("Loading articles...")
+for file in markdown_files:
+    with open(file, "r", encoding="utf-8") as f:
+        markdown_content = f.read()
+    article_contents.append(markdown_content)
+LOGGER.info("Articles loaded successfully")
+
+LOGGER.info("Creating BM25 Index...")
+
+BM25, tokenized_corpus = get_or_create_bm25_index(article_contents)
+
+mcp_server = FastMCP(
+    name="BM25_Index",
+    instructions="This server provides the ability to query a BM25 Index. This should be used for all keyword-based searches, while semantic searches should be done with the PGVectors Server.",
+)
+
+
+@mcp_server.tool(
+    description="Using a BM25 Keyword Based Search, return relevant articles from the database of articles. Submit a query and get the top 3 articles back"
+)
+def query_bm25_index(
+    query: str = Field(..., description="the query string"),
+):
     """Query a BM25 Index
 
     Args:
         query (str): query string
-        bm25 (BM25Okapi): BM25 Index Object
-        corpus (list[str]): a list of raw text documents to index
         n (int, optional): the number of documents to return. Defaults to 3.
 
     Returns:
-        list[float]: a list of scores for each document in the corpus
+        list[str]: a list of the top N article contents (original markdown)
     """
     # In order to get good results, we need to follow the same pre-processing steps that we did when we created our index
     tokenized_query = query.translate(str.maketrans("", "", string.punctuation)).split(
         " "
     )
-    scores = bm25.get_top_n(tokenized_query, corpus, n=n)
-    return scores
+    # Get BM25 scores for all documents
+    scores = BM25.get_scores(tokenized_query)
+
+    # Get indices of top N documents sorted by score
+    top_indices = sorted(range(len(scores)), key=lambda i: scores[i], reverse=True)[:3]
+
+    # Return the original article contents for the top N documents
+    top_documents = [article_contents[i] for i in top_indices]
+
+    return top_documents
+
 
 if __name__ == "__main__":
     # We can load in the markdown files we got from Crawl4AI
-    query = "ATM fraud"
-    markdown_files = glob.glob("data/scraped_markdown_results/*.md")
-    article_contents = []
-
-    print("[bold green]Loading articles...[/bold green]")
-
-    with Progress() as progress:
-        for file in progress.track(markdown_files, description="Loading articles"):
-            with open(file, "r", encoding="utf-8") as f:
-                markdown_content = f.read()
-            article_contents.append(markdown_content)
-    
-    bm25 = get_or_create_bm25_index(article_contents)
-    top_documents = query_bm25_index(query, bm25, article_contents)
-    print(top_documents)
+    mcp_server.run(show_banner=False)
