@@ -42,9 +42,15 @@ def load_articles() -> List[Dict[str, Any]]:
     articles = []
     
     for file in json_files:
-        with open(file, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-            articles.append(data[0])
+        try:
+            with open(file, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                if isinstance(data, list) and len(data) > 0:
+                    articles.append(data[0])
+                else:
+                    print(f"Warning: Skipping {file} - unexpected data format")
+        except (json.JSONDecodeError, IOError) as e:
+            print(f"Warning: Error loading {file}: {e}")
     
     return articles
 
@@ -179,12 +185,13 @@ def plot_article_lengths(articles: List[Dict[str, Any]], save: bool = True):
 def extract_keywords_from_articles(articles: List[Dict[str, Any]]) -> Counter:
     """
     Extract keywords/topics from article content using simple pattern matching.
+    Counts the number of articles containing each keyword (not total occurrences).
     
     Args:
         articles: List of article dictionaries
         
     Returns:
-        Counter object with keyword frequencies
+        Counter object with keyword frequencies (articles containing keyword)
     """
     # Common fraud-related keywords to look for
     keywords = [
@@ -200,9 +207,8 @@ def extract_keywords_from_articles(articles: List[Dict[str, Any]]) -> Counter:
     for article in articles:
         content = article.get('raw_content', '').lower()
         for keyword in keywords:
-            # Count occurrences of each keyword
-            count = len(re.findall(r'\b' + re.escape(keyword.lower()) + r'\b', content))
-            if count > 0:
+            # Check if keyword appears in the article (at least once)
+            if re.search(r'\b' + re.escape(keyword.lower()) + r'\b', content):
                 keyword_counts[keyword] += 1
     
     return keyword_counts
