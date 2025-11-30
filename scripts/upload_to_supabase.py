@@ -83,6 +83,25 @@ def upload_keywords_to_supabase(article_name: str, keywords: list[str]) -> bool:
     
     return True
 
+def upload_summary_to_supabase(article_name: str, summary: str):
+    if not article_name:
+        raise ValueError("Article name is required")
+    if not summary:
+        raise ValueError("You must pass in a summary to upload")
+    
+    # Check if article with this name already exists
+    existing_article = CLIENT.table("articles").select("*").eq("article_name", article_name).single().execute().data.get('article_id')
+    if existing_article:
+        CLIENT.table("article_extract").insert({
+            "article_id": existing_article,
+            "type": "summary",
+            "text": summary
+        }).execute()
+    else:
+        raise ValueError("Article not found")
+    
+    return True
+
 if __name__ == "__main__":
     # Load in all the JSON files in our data folder
     json_files = glob.glob("data/scraped_json_results/*.json")
