@@ -217,3 +217,14 @@ __marimo__/
 
 /.history
 /.claude
+
+# secrets
+.env
+.env.*
+Streamlit UI/.env
+
+# Streamlit stuff
+.streamlit/secrets.toml
+.history
+
+
