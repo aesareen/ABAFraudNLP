@@ -7,15 +7,21 @@ from crawl4ai import (
     JsonCssExtractionStrategy,
     LLMConfig,
     AdaptiveConfig,
-    AdaptiveCrawler
+    AdaptiveCrawler,
+    BrowserConfig
 )
 from crawl4ai.markdown_generation_strategy import DefaultMarkdownGenerator
 from crawl4ai.content_filter_strategy import PruningContentFilter
+from crawl4ai.deep_crawling import BFSDeepCrawlStrategy, BestFirstCrawlingStrategy
+from crawl4ai.deep_crawling.scorers import KeywordRelevanceScorer
+from crawl4ai.deep_crawling.filters import FilterChain, ContentTypeFilter, DomainFilter
 from rich import print
 from urllib.parse import urlparse
+import glob
 import re
 from dotenv import load_dotenv
 import os
+import re
 
 load_dotenv(dotenv_path="config/.env", override=True)
 
@@ -90,6 +96,82 @@ def extract_filename_from_url(url):
 
     return parsed.netloc.replace(".", "_")
 
+
+def save_scraped_result(result, filename, seen_filenames=None):
+    """
+    Save scraped result to markdown and JSON files.
+    
+    Args:
+        result: The crawl result object containing extracted_content, markdown.fit_markdown, and url
+        filename: Base filename to use (without extension)
+        seen_filenames: Optional dict to track duplicate filenames
+    
+    Returns:
+        Tuple of (success: bool, final_filename: str)
+    """
+    try:
+        # Handle duplicate filenames
+        final_filename = filename
+        if seen_filenames is not None:
+            if filename in seen_filenames:
+                seen_filenames[filename] += 1
+                final_filename = f"{filename}_{seen_filenames[filename]}"
+            else:
+                seen_filenames[filename] = 0
+        
+        # Parse JSON result
+        json_result = json.loads(result.extracted_content)
+        
+        # Sometimes articles say "For Immediate Release", and we don't really care for that, so we can overwrite the field with the actual date
+        if (
+            isinstance(json_result[0]["date_published"], list)
+            and len(json_result[0]["date_published"]) > 1
+        ):
+            json_result[0]["date_published"] = json_result[0]["date_published"][
+                1
+            ]["date"].split("Published ")[-1].strip()
+        elif (
+            isinstance(json_result[0]["date_published"], list)
+            and len(json_result[0]["date_published"]) == 1
+        ):
+            json_result[0]["date_published"] = json_result[0]["date_published"][
+                0
+            ]["date"].split("Published ")[-1].strip()
+        elif isinstance(
+            json_result[0]["date_published"], str
+        ):  # This is for journal ABA
+            json_result[0]["date_published"] = json_result[0]["date_published"]
+        else:
+            json_result[0]["date_published"] = None
+        
+        # Sometimes there is weird unicode characters in our raw content, so we can convert to ASCII and then convert back to get rid of them
+        json_result[0]["raw_content"] = (
+            json_result[0]["raw_content"]
+            .encode("ascii", "ignore")
+            .decode("ascii")
+        )
+        
+        json_result[0]["source_url"] = result.url
+        
+        markdown_result = result.markdown.fit_markdown  # get the markdown only for the target elements
+        
+        # Write markdown file
+        markdown_filepath = f"data/scraped_markdown_results/{final_filename}.md"
+        with open(markdown_filepath, "w", encoding="utf-8") as file:
+            file.write(markdown_result)
+        print(f"  → Saved as: [cyan]{final_filename}.md[/cyan]")
+        
+        # Write JSON file
+        json_filepath = f"data/scraped_json_results/{final_filename}.json"
+        with open(json_filepath, "w", encoding="utf-8") as file:
+            json.dump(json_result, file, indent=4)
+        print(f"  → Saved as: [cyan]{final_filename}.json[/cyan]")
+        
+        return True, final_filename
+    except Exception as e:
+        print(f"[red]Error saving {result.url}: {e}[/red]")
+        return False, filename
+
 async def scrape_website(urls, config):
     seen_filenames = {}
     successful = 0
@@ -98,66 +180,12 @@ async def scrape_website(urls, config):
         async for result in await crawler.arun_many(urls=urls, config=config):
             if result.success:
                 print(f"[green]Successfully crawled: {result.url}[/green]")
-
+                
                 base_filename = extract_filename_from_url(result.url)
-
-                filename = base_filename
-                if filename in seen_filenames:
-                    seen_filenames[filename] += 1
-                    filename = f"{base_filename}_{seen_filenames[filename]}"
-                else:
-                    seen_filenames[filename] = 0
-
-                json_result = json.loads(result.extracted_content)
-
-                # Sometimes articles say "For Immediate Release", and we don't really care for that, so we can overwrite the field with the actual date
-                if (
-                    isinstance(json_result[0]["date_published"], list)
-                    and len(json_result[0]["date_published"]) > 1
-                ):
-                    json_result[0]["date_published"] = json_result[0]["date_published"][
-                        1
-                    ]["date"].split("Published ")[-1].strip()
-                elif (
-                    isinstance(json_result[0]["date_published"], list)
-                    and len(json_result[0]["date_published"]) == 1
-                ):
-                    json_result[0]["date_published"] = json_result[0]["date_published"][
-                        0
-                    ]["date"].split("Published ")[-1].strip()
-                elif isinstance(
-                    json_result[0]["date_published"], str
-                ):  # This is for journal ABA
-                    json_result[0]["date_published"] = json_result[0]["date_published"]
-                else:
-                    json_result[0]["date_published"] = None
-
-                # Sometimes there is weird unicode characters in our raw content, so we can convert to ASCII and then convert back to get rid of them
-                json_result[0]["raw_content"] = (
-                    json_result[0]["raw_content"]
-                    .encode("ascii", "ignore")
-                    .decode("ascii")
-                )
-
-                json_result[0]["source_url"] = result.url
-
-                markdown_result = result.markdown.fit_markdown # get the markdown only for the target elements
-
-                try:
-                    filepath = f"data/scraped_markdown_results/{filename}.md"
-                    # with open(filepath, "w", encoding="utf-8") as file:
-                    #     file.write(markdown_result)
-                    print(f"  → Saved as: [cyan]{filename}.md[/cyan]")
-                    # with open(
-                    #     f"data/scraped_json_results/{filename}.json",
-                    #     "w",
-                    #     encoding="utf-8",
-                    # ) as file:
-                    #     json.dump(json_result, file, indent=4)
-                    print(f"  → Saved as: [cyan]{filename}.json[/cyan]")
+                success, final_filename = save_scraped_result(result, base_filename, seen_filenames)
+                if success:
                     successful += 1
-                except Exception as e:
-                    print(f"[red]Error saving {result.url}: {e}[/red]")
+                else:
                     failed += 1
             else:
                 print(f"[red]Failed to crawl: {result.url}[/red]")
@@ -225,6 +253,84 @@ async def scrape_aba_journal(urls):
     return await scrape_website(urls, config)
 
 
+async def deep_crawling_aba_journal(url, seen_urls):
+    article_pattern = re.compile(r'/\d{4}/\d{2}/')
+    browser_config = BrowserConfig(
+        enable_stealth=True,
+        headless=True
+    )
+    scorer = KeywordRelevanceScorer(
+        keywords=[
+            "check fraud",
+            "fraud",
+            "fraud prevention",
+            "scams",
+            "consumer education",
+            "risk management",
+            "synthetic identity",
+            "banks",
+            "fraud detection",
+            "phishing",
+            "elder financial abuse",
+            "fraud trends",
+        ],
+        weight=0.7,
+    )
+    deep_crawling_config = CrawlerRunConfig(
+        verbose=True,
+        stream=True,
+        deep_crawl_strategy=BestFirstCrawlingStrategy(
+            url_scorer=scorer,
+            max_depth=3,
+            include_external=False,
+            max_pages=35,
+            filter_chain = FilterChain([
+                ContentTypeFilter(allowed_types=["text/html"]),
+                DomainFilter(
+                    allowed_domains=["bankingjournal.aba.com"]
+                ),
+            ])
+        ),
+        cache_mode=CacheMode.BYPASS,
+        target_elements=[
+            field["selector"] for field in json_schemas["journal"]["fields"]
+        ],
+        extraction_strategy=JsonCssExtractionStrategy(schema=json_schemas["journal"]),
+        markdown_generator=DefaultMarkdownGenerator(
+            options={
+                "ignore_links": True,
+                "ignore_images": True,
+                "skip_internal_links": True,
+            },
+            content_filter=PruningContentFilter(
+                threshold=0.80, threshold_type="dynamic", min_word_threshold=0
+            ),
+        ),
+        excluded_tags=[],
+        exclude_social_media_links=True,
+        exclude_external_links=True,
+        page_timeout=60000,
+        delay_before_return_html=2.0,
+    )
+
+    async with AsyncWebCrawler(config=browser_config) as crawler:
+        async for result in await crawler.arun(url=url, config=deep_crawling_config):
+            if result.success:
+                # We really only care about articles, not the overall category pages that the ABA Journal has
+                if article_pattern.search(result.url) and '/category/' not in result.url:
+                    if result.url in seen_urls:
+                        continue
+                    seen_urls.add(result.url)
+            
+                    # We don't want to scrape the same article twice, so we skip if we've already seen it
+                    filename = extract_filename_from_url(result.url)
+                    success, final_filename = save_scraped_result(result, filename)
+                    if success:
+                        print(f"[green]Successfully saved: {result.url}[/green]")
+            else:
+                print(result.error_message)
+    return seen_urls
+
 # Adaptive Deep Crawling, but doesn't really work, might be helpful at some point
 # async def adaptive_crawling_aba_journal(query: str):
 #     search_page_async_crawler_config = CrawlerRunConfig(
@@ -275,7 +381,7 @@ async def scrape_aba_journal(urls):
 #         max_pages = 35,
 #         top_k_links = 5,
 #         # embedding_min_relative_improvement = 0.2,
-        
+
 #     )
 
 #     async with AsyncWebCrawler(config=search_page_async_crawler_config) as crawler:
@@ -284,7 +390,7 @@ async def scrape_aba_journal(urls):
 #         # async def constrained_arun(url: str, **kwargs):
 #         #     kwargs['config'] = search_page_async_crawler_config
 #         #     return await original_arun(url, **kwargs)
-        
+
 #         # crawler.arun = constrained_arun
 
 #         adaptive = AdaptiveCrawler(crawler = crawler, config=adaptive_config)
@@ -305,8 +411,6 @@ async def scrape_aba_journal(urls):
 #     print(f'Pending URLS: {result.pending_links[:4]}')
 #     for page in adaptive.get_relevant_content(top_k=3):
 #         print(page['url'])
-
-
 
 
 async def main():
@@ -331,7 +435,19 @@ async def main():
     else:
         print("[red]Journal scraping failed[/red]")
 
+def retrieve_previously_scraped_urls():
+    markdown_files = glob.glob("data/scraped_json_results/*.json")
+    return [json.load(open(file, "r"))[0]["source_url"] for file in markdown_files]
+
 
 if __name__ == "__main__":
     # asyncio.run(main())
-    asyncio.run(adaptive_crawling_aba_journal("latest news on check fraud"))
+    previously_scraped_urls = set(retrieve_previously_scraped_urls())
+    seen_urls = asyncio.run(deep_crawling_aba_journal("https://bankingjournal.aba.com/category/technology/", previously_scraped_urls))
+    seen_urls.update(asyncio.run(deep_crawling_aba_journal("https://bankingjournal.aba.com/category/communitybanking/", seen_urls)))
+    seen_urls.update(asyncio.run(deep_crawling_aba_journal("https://bankingjournal.aba.com/category/compliance/", seen_urls)))
+    seen_urls.update(asyncio.run(deep_crawling_aba_journal("https://bankingjournal.aba.com/category/cybersecurity/", seen_urls)))
+    seen_urls.update(asyncio.run(deep_crawling_aba_journal("https://bankingjournal.aba.com/category/mortgage/", seen_urls)))
+    seen_urls.update(asyncio.run(deep_crawling_aba_journal("https://bankingjournal.aba.com/category/policy/", seen_urls)))
+    seen_urls.update(asyncio.run(deep_crawling_aba_journal("https://bankingjournal.aba.com/category/technology/", seen_urls)))
+    print(seen_urls)
