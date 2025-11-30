@@ -5,12 +5,19 @@ from crawl4ai import (
     CrawlerRunConfig,
     CacheMode,
     JsonCssExtractionStrategy,
+    LLMConfig,
+    AdaptiveConfig,
+    AdaptiveCrawler
 )
 from crawl4ai.markdown_generation_strategy import DefaultMarkdownGenerator
 from crawl4ai.content_filter_strategy import PruningContentFilter
 from rich import print
 from urllib.parse import urlparse
 import re
+from dotenv import load_dotenv
+import os
+
+load_dotenv(dotenv_path="config/.env", override=True)
 
 json_schemas = {
     "website": {
@@ -138,15 +145,15 @@ async def scrape_website(urls, config):
 
                 try:
                     filepath = f"data/scraped_markdown_results/{filename}.md"
-                    with open(filepath, "w", encoding="utf-8") as file:
-                        file.write(markdown_result)
+                    # with open(filepath, "w", encoding="utf-8") as file:
+                    #     file.write(markdown_result)
                     print(f"  → Saved as: [cyan]{filename}.md[/cyan]")
-                    with open(
-                        f"data/scraped_json_results/{filename}.json",
-                        "w",
-                        encoding="utf-8",
-                    ) as file:
-                        json.dump(json_result, file, indent=4)
+                    # with open(
+                    #     f"data/scraped_json_results/{filename}.json",
+                    #     "w",
+                    #     encoding="utf-8",
+                    # ) as file:
+                    #     json.dump(json_result, file, indent=4)
                     print(f"  → Saved as: [cyan]{filename}.json[/cyan]")
                     successful += 1
                 except Exception as e:
@@ -218,6 +225,90 @@ async def scrape_aba_journal(urls):
     return await scrape_website(urls, config)
 
 
+# Adaptive Deep Crawling, but doesn't really work, might be helpful at some point
+# async def adaptive_crawling_aba_journal(query: str):
+#     search_page_async_crawler_config = CrawlerRunConfig(
+#         css_selector = '.list-complex',
+#         user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+#         cache_mode=CacheMode.BYPASS,
+#         magic=True,
+#         exclude_external_links=False,
+#         excluded_tags=['nav', 'header', 'footer', 'script', 'style'],
+#     )
+#     article_async_crawler_config = CrawlerRunConfig(
+#         verbose=True,
+#         stream=True,
+#         cache_mode=CacheMode.BYPASS,
+#         target_elements = [field['selector'] for field in json_schemas["website"]["fields"]],
+#         extraction_strategy=JsonCssExtractionStrategy(
+#             schema=json_schemas["website"], verbose=True
+#         ),
+#         markdown_generator=DefaultMarkdownGenerator(
+#             options={
+#                 "ignore_links": True,
+#                 "ignore_images": True,
+#                 "skip_internal_links": True,
+#             },
+#             content_filter=PruningContentFilter(
+#                 threshold=0.80, threshold_type="dynamic", min_word_threshold=0
+#             ),
+#         ),
+#         excluded_tags=[],
+#         exclude_social_media_links=True,
+#         exclude_external_links=True,
+#         page_timeout=60000,
+#         delay_before_return_html=2.0,
+#     )
+
+#     adaptive_config = AdaptiveConfig(
+#         strategy="embedding",
+#         embedding_model='openai/text-embedding-3-small',
+#         embedding_llm_config = {
+#             "provider": 'openai/text-embedding-3-small',
+#             "api_token": os.getenv("OPENAI_API_KEY"),
+#             "temperature": 0.5,
+#         },
+#         confidence_threshold = 0.6,
+#         # n_query_variations = 12,
+#         min_gain_threshold = .001,
+#         # embedding_min_confidence_threshold=.4,
+#         max_pages = 35,
+#         top_k_links = 5,
+#         # embedding_min_relative_improvement = 0.2,
+        
+#     )
+
+#     async with AsyncWebCrawler(config=search_page_async_crawler_config) as crawler:
+#         # original_arun = crawler.arun
+
+#         # async def constrained_arun(url: str, **kwargs):
+#         #     kwargs['config'] = search_page_async_crawler_config
+#         #     return await original_arun(url, **kwargs)
+        
+#         # crawler.arun = constrained_arun
+
+#         adaptive = AdaptiveCrawler(crawler = crawler, config=adaptive_config)
+#         result = await adaptive.digest(
+#             start_url = "https://bankingjournal.aba.com/category/newsbytes/",
+#             query = query,
+#             # config = async_crawler_config,
+#         )
+#         adaptive.print_stats(detailed=True)
+
+#     print('here!')
+#     # print(result)
+#     # if result.metrics.get("is_irrelevant", False):
+#     #     print("Query is unrelated to content!")
+#     #     return "Query is unrelated to content!"
+#     # else:
+#     print(result.crawled_urls)
+#     print(f'Pending URLS: {result.pending_links[:4]}')
+#     for page in adaptive.get_relevant_content(top_k=3):
+#         print(page['url'])
+
+
+
+
 async def main():
     urls = load_in_manual_sources("data/manual_search.txt")
     website_urls = []
@@ -242,4 +333,5 @@ async def main():
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    # asyncio.run(main())
+    asyncio.run(adaptive_crawling_aba_journal("latest news on check fraud"))
