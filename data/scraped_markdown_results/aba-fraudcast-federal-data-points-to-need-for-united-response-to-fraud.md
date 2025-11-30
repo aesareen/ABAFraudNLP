@@ -1,0 +1,7 @@
+# ABA Fraudcast: Federal data points to need for united response to fraud
+June 11, 2025 November 26, 2025 November 25, 2025 November 24, 2025 November 24, 2025 November 24, 2025 November 24, 2025 November 26, 2025 November 26, 2025 November 26, 2025 November 1, 2025 October 31, 2025 October 20, 2025 October 1, 2025 November 6, 2025 October 23, 2025 October 16, 2025
+Recent data on scams and fraud from the Federal Trade Commission and the FBI is, to no surprise, trending in the wrong direction. But there is confusion around such national reporting, and that is part of the problem. “There is no central figure leading this fight,” says ABA’s Paul Benda, who describes important challenges to addressing scams and fraud on a national scale on this week’s edition of the ABA Fraudcast.
+“In the U.S. there is still no clear framework or guidance from regulators on how and what information banks can share with each other to help stop scams and fraud,” Benda says. The challenge to address fraud is not just for banks, he adds. “Other industries like telecoms and social media companies have to recognize that responsibility as well.”
+The will be published every three weeks, on this site, in ABA Daily Newsbytes and wherever you listen to and subscribe to your favorite podcasts.
+If you can’t see the audio player above, to listen to this week’s episode.
+to help banks prevent, identify, measure and report fraud, and to serve and protect consumers and their financial data.​

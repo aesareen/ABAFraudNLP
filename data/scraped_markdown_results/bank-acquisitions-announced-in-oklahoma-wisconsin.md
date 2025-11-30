@@ -1,0 +1,5 @@
+# Bank acquisitions announced in Oklahoma, Wisconsin
+November 18, 2025 November 26, 2025 November 26, 2025 November 26, 2025 November 26, 2025 November 25, 2025 November 25, 2025 November 26, 2025 November 26, 2025 November 26, 2025 November 1, 2025 October 31, 2025 October 20, 2025 October 1, 2025 November 6, 2025 October 23, 2025 October 16, 2025
+BancFirst in Oklahoma City has agreed to buy American Bank of Oklahoma in Collinsville. The $14 billion-asset BancFirst said in a press release that it expects to buy the $385 million-asset American Bank in the third quarter. The price wasn’t disclosed.
+Jewel Box Financial Services in Columbus, Wisconsin, has agreed to buy Ambanc Financial Services in Beaver Dam, Wisconsin. Jewel Box, the parent of the $661 million-asset Farmers & Merchants Union Bank, expects to buy the holding company for the $202 million-asset American Bank of Beaver Dam in the first quarter, according to an announcement by Olsen Palmer. The price wasn’t disclosed.
+_M &A News is reported by Paul Davis and reprinted with permission as an adaptation of the material from TheBankSlate.com._

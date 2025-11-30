@@ -1,0 +1,6 @@
+# ABA’s Treasury check verification tool allows banks to report counterfeit checks
+October 14, 2025 November 26, 2025 November 26, 2025 November 26, 2025 November 26, 2025 November 26, 2025 November 25, 2025 November 26, 2025 November 26, 2025 November 26, 2025 November 1, 2025 October 31, 2025 October 20, 2025 October 1, 2025 November 6, 2025 October 23, 2025 October 16, 2025
+Banks using the American Banker Association’s online tool to access the Treasury Check Verification System will be able to report counterfeit checks through the tool starting Wednesday, according to Paul Benda, ABA EVP for Risk, Fraud and Cybersecurity.
+Benda announced the new feature at the Financial Crimes Enforcement Conference, which is taking place this week in Arlington, Virginia. ABA launched the tool in June, allowing member banks to access the Treasury Department’s TCVS at no cost. Since then, the tool has processed more than $600 million in Treasury checks.
+The new reporting system will allow ABA to collect real-time information on counterfeiting, Benda said.
+“We’re not tracking it by bank. We’re not tracking it by payee names. We’re not capturing any information like that,” he said. “We’re simply capturing the fact that this is occurring.”

@@ -1,0 +1,6 @@
+# Bank survey finds optimism about affordable housing growth
+November 17, 2025 November 26, 2025 November 26, 2025 November 26, 2025 November 26, 2025 November 25, 2025 November 25, 2025 November 26, 2025 November 26, 2025 November 26, 2025 November 1, 2025 October 31, 2025 October 20, 2025 October 1, 2025 November 6, 2025 October 23, 2025 October 16, 2025
+Despite market challenges, housing professionals still expect access to affordable housing to grow in the coming year, according to a recent survey by TD Bank.
+Respondents cited high construction costs (55%) and price increases from tariffs (39%) as the biggest barriers to affordable housing development. As a result, only 29% of housing professionals plan to expand housing developments next year.
+Still, more than half (52%) said they were confident that access to affordable housing would expand in 2026, and nearly two-thirds (62%) expected development to rise. The strongest demand was projected in multifamily housing (64%), housing for seniors/elderly populations (58%) and workforce housing for essential and middle-income workers (50%).
+Respondents also said financial institutions can provide the most support for affordable housing by offering dedicated affordable housing lending programs or teams (27%), flexible lending terms (26%), and bridge financing or gap funding solutions (25%).
