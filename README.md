@@ -5,7 +5,8 @@
 ### AI-powered NLP system for extracting, ranking, and summarizing suspicious ABA banking fraud alerts
 
 **Authors:** Maksim Dimitrijević, Arnav Sareen, Ana Abreu, Nabeel Balighuddin
-UNC Charlotte — Data Science Project
+
+UNC Charlotte — DTSC 3602 USAA Project 
 
 ---
 
@@ -205,5 +206,6 @@ uv run python scripts/upload_to_supabase.py
 uv run python scripts/bm25.py
 streamlit run visualizations/streamlit_app.py
 ```
+
 
 
