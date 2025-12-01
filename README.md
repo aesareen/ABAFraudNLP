@@ -8,7 +8,7 @@ UNC Charlotte • DTSC 3602 – USAA Fraud Analytics Project
 
 ---
 
-## 1) Clear First Impression
+## 1. Clear First Impression
 
 **One-sentence summary:**  
 ABAFraudNLP automatically scrapes ABA fraud articles, cleans and processes them, generates LLM-powered summaries and keywords, embeds them using OpenAI vectors, and visualizes fraud trends in a searchable Streamlit dashboard backed by Supabase.
@@ -195,6 +195,7 @@ results = query_bm25_index("cyber fraud attack")
 
 ```
 ```
+
 
 
 
