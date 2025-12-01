@@ -5,6 +5,7 @@ import ast
 import re
 from collections import Counter
 from urllib.parse import urlparse
+from nltk.corpus import stopwords
 
 import altair as alt
 import numpy as np
@@ -18,7 +19,7 @@ from dotenv import load_dotenv
 # Environment / Supabase config
 # ============================================================
 
-load_dotenv()
+load_dotenv('config/.env', override=True)
 
 SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_KEY")
@@ -43,6 +44,11 @@ ARTICLES_TABLE = os.getenv("ARTICLES_TABLE", "articles")
 EXTRACT_TABLE = os.getenv("EXTRACT_TABLE", "article_extract")
 EMBEDDINGS_TABLE = os.getenv("EMBEDDINGS_TABLE", "article_embeddings")
 
+# Streamlit session state
+if "max_rows" not in st.session_state:
+    st.session_state.max_rows = 20
+if "case_sensitive" not in st.session_state:
+    st.session_state.case_sensitive = True
 
 # ============================================================
 # Small helpers
@@ -75,6 +81,13 @@ def fetch_table(
     resp.raise_for_status()
     data = resp.json()
     return pd.DataFrame(data)
+
+@st.cache_data
+def fetch_number_of_rows(table_name: str) -> int:
+    table = fetch_table(table_name)
+    if table.empty:
+        return 0
+    return len(table)
 
 
 def compute_embedding_coords(emb_df: pd.DataFrame) -> pd.DataFrame:
@@ -207,31 +220,7 @@ def load_data(max_rows: int = 20) -> pd.DataFrame | None:
 # Text / NLP helpers
 # ============================================================
 
-STOPWORDS = {
-    "the",
-    "and",
-    "for",
-    "with",
-    "that",
-    "this",
-    "from",
-    "have",
-    "will",
-    "about",
-    "into",
-    "your",
-    "their",
-    "been",
-    "they",
-    "would",
-    "are",
-    "was",
-    "were",
-    "you",
-    "our",
-    "but",
-    "not",
-}
+STOPWORDS = stopwords.words("english")
 
 
 def filter_by_keyword(df: pd.DataFrame, keyword: str, case_sensitive: bool) -> pd.DataFrame:
@@ -519,16 +508,30 @@ st.caption("Data source: ABA fraud news articles stored in a Supabase Postgres d
 # ------------------------------------------------------------
 with st.sidebar:
     st.header("Settings")
-
-    max_rows = st.number_input(
-        "Maximum number of articles to load",
-        min_value=5,
-        max_value=100,
-        step=5,
-        value=20,
-    )
-
-    case_sensitive = st.checkbox("Case-sensitive search", value=False)
+    
+    st.session_state.all_articles = st.checkbox("Load all articles", value=False)
+    total_rows = fetch_number_of_rows(ARTICLES_TABLE)
+    # If "Load all articles" is checked, update max_rows to total count
+    if st.session_state.all_articles:
+        st.session_state.max_rows = total_rows
+        st.number_input(
+            "Maximum number of articles to load",
+            min_value=5,
+            max_value=total_rows,
+            step=5,
+            value=total_rows,
+            disabled=True,
+            help="All articles are being loaded"
+        )
+    else:
+        st.session_state.max_rows = st.number_input(
+            "Maximum number of articles to load",
+            min_value=5,
+            max_value=total_rows,
+            step=5,
+            value=st.session_state.max_rows if st.session_state.max_rows <= 150 else 20,
+        )
+    st.session_state.case_sensitive = st.checkbox("Case-sensitive search", value=False)
 
     st.markdown("**Tables used:**")
     st.markdown(f"- `{ARTICLES_TABLE}`")
@@ -538,7 +541,7 @@ with st.sidebar:
 # ------------------------------------------------------------
 # Load data
 # ------------------------------------------------------------
-df_all = load_data(max_rows=max_rows)
+df_all = load_data(max_rows=st.session_state.max_rows)
 if df_all is None or df_all.empty:
     st.stop()
 
@@ -589,7 +592,7 @@ if not keyword:
     st.stop()
 
 # Filter
-filtered_df = filter_by_keyword(df_all, keyword, case_sensitive=case_sensitive)
+filtered_df = filter_by_keyword(df_all, keyword, case_sensitive=st.session_state.case_sensitive)
 
 if filtered_df.empty:
     st.warning(f"No articles found that mention '{keyword}'. Try a different word.")
