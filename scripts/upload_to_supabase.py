@@ -72,7 +72,7 @@ def query_embeddings_from_supabase(query: str) -> tuple[list[str], list[str], li
         "match_threshold": 0.4,
         "match_count": 4
     }).execute()
-    # Ideally we would return the article nmaes and contents, so we can do a join on the article_id and get the article names and contents
+    # Ideally we would return the article names and contents, so we can do a join on the article_id and get the article names and contents
     article_ids = [item['article_id'] for item in response.data]
     articles = CLIENT.table("articles").select("article_name, raw_content").in_("article_id", article_ids).execute()
     summaries = CLIENT.table("article_extract").select("text").eq("type", "summary").in_("article_id", article_ids).execute()
