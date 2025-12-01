@@ -87,7 +87,7 @@ flowchart TD
 ### 3.2 Real Streamlit Dashboard Visuals
 
 ![Dashboard](dash.png)
-![Embedding Map](images/embedding_map.png)
+![Embedding Map](embed.png)
 ![Category Frequency](rename.png)
 ![Heatmap](images/heatmap.png)
 
@@ -206,6 +206,7 @@ results = query_bm25_index("cyber fraud attack")
 
 ```
 ```
+
 
 
 
