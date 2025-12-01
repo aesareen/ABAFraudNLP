@@ -1,211 +1,217 @@
 
+# ABAFraudNLP
 
-# ***ABAFraudNLP***
+AI-powered NLP system for scraping, enriching, and analyzing fraud-related articles from the American Bankkers Association (ABA).
 
-### AI-powered NLP system for extracting, ranking, and summarizing suspicious ABA banking fraud alerts
-
-**Authors:** Maksim Dimitrijević, Arnav Sareen, Ana Abreu, Nabeel Balighuddin
-
-UNC Charlotte — DTSC 3602 USAA Project 
+**Team:** Arnav Sareen • Maksim Dimitrijević • Ana Abreu • Nabeel Balighuddin  
+UNC Charlotte • DTSC 3602 – USAA Fraud Analytics Project  
 
 ---
 
-## **1. Clear First Impression**
+## 1) Clear First Impression
 
-**One-sentence summary**
-ABAFraudNLP scrapes ABA banking fraud alerts, transforms them into structured text, ranks them with BM25, and summarizes key insights with an LLM-powered agent through a Streamlit dashboard.
-
-**Tagline**
-From raw fraud alerts to searchable intelligence.
+**One-sentence summary:**  
+ABAFraudNLP automatically scrapes ABA fraud articles, cleans and processes them, generates LLM-powered summaries and keywords, embeds them using OpenAI vectors, and visualizes fraud trends in a searchable Streamlit dashboard backed by Supabase.
 
 ---
 
-## **2. Quick Start**
+## 2. Quick Start
 
-### **Install dependencies**
-
+### Install with `uv`
 ```bash
 uv sync
-```
+````
 
-### **Set up environment variables**
+### Environment Variables
 
-Copy the template:
-
-```bash
-cp config/.env.example .env
-```
-
-Edit `.env` and include:
-
-```
-SUPABASE_URL=
-SUPABASE_SERVICE_KEY=
-OPENAI_API_KEY=
-MODEL_NAME=
-OUTPUT_DIR=
-```
-
-### **Run the scraper**
+The app expects a `.env` file inside the `config/` directory.
 
 ```bash
+cp config/.env.example config/.env
+```
+
+Then edit `config/.env`:
+
+```env
+OPENAI_API_KEY=your_key
+SUPABASE_URL=your_supabase_url
+SUPABASE_KEY=your_supabase_key
+```
+
+### Run the full pipeline
+
+```bash
+# 1. Scrape ABA articles → data/scraped_markdown_results/
 uv run python scripts/scraper.py
-```
 
-### **Upload scraped documents to Supabase**
+# 2. Generate keywords using LLM agent
+uv run python agents/summarization_agent.py
 
-```bash
+# 3. Upload articles + keywords + embeddings to Supabase
 uv run python scripts/upload_to_supabase.py
-```
 
-### **Run BM25 ranking**
-
-```bash
+# 4. (Optional) BM25 keyword search service
 uv run python scripts/bm25.py
 ```
 
-### **Launch the Streamlit dashboard**
+### Launch the Streamlit dashboard
 
 ```bash
-streamlit run visualizations/streamlit_app.py
+uv run streamlit run streamlit/streamlit_app.py
 ```
 
 ---
 
-## **3. Visuals and Application Design**
+## 3. Visuals / Application Design
 
-### **Architecture Diagram**
+### 3.1 Architecture Diagram
 
 ```mermaid
 flowchart TD
-    A[ABA Fraud Website] --> B[Scraper]
-    B --> C[Scraped JSON + Markdown]
-    C --> D[Summarization Agent]
-    C --> E[BM25 Ranking Engine]
-    D --> F[Supabase Database]
-    E --> F
-    F --> G[Streamlit Dashboard]
+    A["ABA Fraud Articles"] --> B["Scraper (Crawl4AI)"]
+    B --> C["Raw Markdown & JSON"]
+    C --> D["Cleaning + Standardization"]
+    D --> E["LLM Summaries + Keywords"]
+    D --> F["OpenAI Embeddings"]
+    E --> G["Supabase: article_extract"]
+    D --> H["Supabase: articles"]
+    F --> I["Supabase: article_embeddings"]
+    H --> J["BM25 Index (bm25.py)"]
+    G --> K["Streamlit Dashboard"]
+    I --> K
+    H --> K
 ```
 
-### **Folder Structure**
+---
+
+### 3.2 Real Streamlit Dashboard Visuals
+
+![Dashboard](images/dash.png)
+![Embedding Map](images/embed.png)
+![Category Frequency](images/rename.png)
+![Heatmap](images/heat.png)
+
+---
+
+### 3.3 Supabase Database Schema
+
+![Supabase Schema](images/supa.png)
+
+---
+
+### 3.4 Folder Structure (Real)
 
 ```
 ABAFraudNLP/
-├── main.py
-├── .gitignore
-├── config/
-│   └── .env.example
 ├── agents/
 │   ├── prompts.py
 │   └── summarization_agent.py
+├── config/
+│   └── .env.example
+├── data/
+│   ├── scraped_markdown_results/
+│   ├── scraped_json_results/
+│   └── manual_search.txt
+├── images/
 ├── scripts/
 │   ├── scraper.py
 │   ├── upload_to_supabase.py
 │   └── bm25.py
-├── data/
-│   ├── scraped_json_results/
-│   ├── scraped_markdown_results/
-│   └── manual_search.txt
-├── visualizations/
-│   ├── Streamlit/
-│   ├── visualization.ipynb
+├── streamlit/
 │   └── streamlit_app.py
-└── Streamlit ui/
-    └── streamlit_app.py
+├── visualizations/
+│   └── visualization.ipynb
+├── pyproject.toml
+└── README.md
 ```
-
-### **Screenshots (placeholders)**
-
-![placeholder](https://via.placeholder.com/700x350.png)
-![placeholder](https://via.placeholder.com/700x350.png)
-
-### **GIF Demo Placeholder**
-
-![demo](https://via.placeholder.com/600x350.gif)
 
 ---
 
-## **3.a What We Built (with code samples)**
+## 3a. What We Did (with real examples)
 
-### **Scraping Example**
+### 3a.1 Real Sample Article (Short Preview)
 
-```python
-response = requests.get(url)
-soup = BeautifulSoup(response.text, "html.parser")
+**Source:**
+`data/scraped_markdown_results/aba-consumer-group-urge-action-by-voice-service-providers-to-combat-fraud.md`
 
-item = {
-    "title": title,
-    "date": date,
-    "content": cleaned_text
-}
-```
+**Preview:**
 
-### **BM25 Ranking Example**
+> “A coalition of consumer groups is urging voice service providers to take stronger action to combat fraudulent robocalls and phone-based scams. The groups emphasized the growing risks posed by spoofed caller IDs and called for more aggressive enforcement…”
+
+---
+
+### 3a.2 Minimal Example of LLM Keyword Extraction
 
 ```python
-bm25 = BM25Okapi(tokenized_docs)
-scores = bm25.get_scores(query_tokens)
-```
+agent = initialize_summarization_agent()
 
-### **Summarization Agent Example**
-
-```python
-response = client.chat.completions.create(
-    model=model_name,
-    messages=[
-        {"role": "system", "content": SYSTEM_PROMPT},
-        {"role": "user", "content": user_input}
-    ]
+response = await agent.generate_article_keywords(
+    article_text,
+    []
 )
+
+print(response)
 ```
 
-### **Streamlit UI Example**
+---
+
+### 3a.3 Minimal Example of Embedding Generation
 
 ```python
-st.title("ABA Fraud Alert Search")
-query = st.text_input("Enter a keyword or phrase")
-results = search_engine.search(query)
+from openai import OpenAI
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+emb = client.embeddings.create(
+    model="text-embedding-3-small",
+    input=clean_text
+).data[0].embedding
 ```
 
 ---
 
-## **4. Clear Findings**
+### 3a.4 Minimal Example of BM25 Search
 
-### **Why this project is useful**
-
-ABA fraud alerts are long, unstructured, and time-consuming to read.
-ABAFraudNLP automates the entire process so fraud analysts can search, filter, and understand alerts instantly.
-
-### **What the system achieves**
-
-| Feature             | Benefit                                      |
-| ------------------- | -------------------------------------------- |
-| Automatic scraping  | Removes manual collection work               |
-| LLM summaries       | Converts long reports into readable insights |
-| BM25 ranking        | Finds the most relevant alerts               |
-| Streamlit dashboard | Interactive search + summaries               |
-| Supabase storage    | Centralized and scalable                     |
-
-### **Example Insight**
-
-```text
-"Unauthorized ACH Attempt"
-Score: 17.35
-Summary: The attacker spoofed a payroll system and redirected funds using fraudulent routing numbers.
+```python
+bm25, tokenized = create_bm25_index(all_articles)
+results = query_bm25_index("cyber fraud attack")
 ```
 
 ---
 
-## **Run the Full Pipeline**
+## 4. Clear Findings
 
-```bash
-uv sync
-cp config/.env.example .env
-uv run python scripts/scraper.py
-uv run python scripts/upload_to_supabase.py
-uv run python scripts/bm25.py
-streamlit run visualizations/streamlit_app.py
+### What This Project Reveals
+
+* Banking Security and Cyber Fraud dominate ABA reporting
+* Customer Impact appears frequently
+* Elder Fraud and Training/Awareness are underrepresented
+* Embeddings cluster articles into meaningful groups
+* Co-occurrence patterns show strong links (e.g., Cyber Fraud ↔ Banking Security)
+
+---
+
+## Key Visual Findings (Real)
+
+![Category Frequency](images/rename.png)
+![Heatmap](images/heat.png)
+![Embedding Map](images/embed.png)
+
+---
+
+# Additional Links
+
+* Streamlit: [https://streamlit.io](https://streamlit.io)
+* Supabase: [https://supabase.com](https://supabase.com)
+* crawl4ai: [https://github.com/unclecode/crawl4ai](https://github.com/unclecode/crawl4ai)
+
 ```
+```
+
+
+
+
+
+
 
 
 
