@@ -556,9 +556,12 @@ preset_options = [
     "Type a custom word…",
     "fraud",
     "scam",
+    "consumer protection",
     "scams",
+    "check fraud",
     "phishing",
     "cybersecurity",
+    "risk management",
     "regulation",
     "financial services",
 ]
@@ -749,4 +752,4 @@ with tab_table:
         )
     else:
         st.info("No columns available to display an articles table.")
-# ============================================================ END OF FILE ============================================================
+
