@@ -8,6 +8,8 @@ from keybert.llm import LiteLLM
 from dotenv import load_dotenv
 from upload_to_supabase import upload_keywords_to_supabase, upload_summary_to_supabase
 import os
+from rich import print
+from rich.progress import Progress
 
 load_dotenv(dotenv_path="config/.env", override=True)
 
@@ -104,12 +106,14 @@ if __name__ == "__main__":
             article_content = json_data[0]["raw_content"]
             article_contents.append(article_content)
     
+    print(f"Generating keywords for {len(article_names)} articles")
     keywords = generate_and_touch_up_keywords(article_contents)
+    print(f"Generating summaries for {len(article_names)} articles")
     summaries = generate_article_summaries(article_contents)
-    for article_name, keywords, summary in zip(article_names, keywords, summaries):
-        print(f"Article: {article_name}")
-        print(f"Keywords: {keywords}")
-        print(f"Summary: {summary}")
-        print("-" * 100)
-        # upload_keywords_to_supabase(article_name, keywords)
-        upload_summary_to_supabase(article_name, summary)
+    with Progress() as progress:
+        task = progress.add_task("Processing articles...", total=len(article_names))
+        for article_name, keywords_each, summary in zip(article_names, keywords, summaries):
+            upload_keywords_to_supabase(article_name, keywords_each)
+            upload_summary_to_supabase(article_name, summary)
+            print(f"[green]Successfully uploaded keywords and summaries for {article_name}[/green]")
+            progress.advance(task)
