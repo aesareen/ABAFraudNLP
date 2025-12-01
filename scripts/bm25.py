@@ -20,6 +20,12 @@ logging.basicConfig(
 )
 LOGGER = logging.getLogger(__name__)
 
+def tokenize_documents(documents: list[str]) -> list[list[str]]:
+    return [
+        doc.translate(str.maketrans("", "", string.punctuation)).split(" ")
+        for doc in documents
+    ]
+
 
 def create_bm25_index(documents: list[str], save: bool = False) -> BM25Okapi:
     """Given a list of documents, generate a BM25 Index
@@ -32,15 +38,13 @@ def create_bm25_index(documents: list[str], save: bool = False) -> BM25Okapi:
         BM25Okapi: a BM25 Index object
     """
     # remove punctuation from documents and then split each word into tokens based on whitespace
-    tokenized_corpus = [
-        doc.translate(str.maketrans("", "", string.punctuation)).split(" ")
-        for doc in documents
-    ]
+
+    tokenized_corpus = tokenize_documents(documents)
     bm25 = BM25Okapi(tokenized_corpus)
     if save:
         with open(BM25_INDEX_PATH, "wb") as f:
             pickle.dump(bm25, f)
-    return bm25, tokenized_corpus
+    return bm25
 
 
 def get_or_create_bm25_index(documents: list[str], save: bool = False):
@@ -57,8 +61,8 @@ def get_or_create_bm25_index(documents: list[str], save: bool = False):
         with open(BM25_INDEX_PATH, "rb") as f:
             bm25 = pickle.load(f)
     else:
-        bm25, tokenized_corpus = create_bm25_index(documents, save)
-    return bm25, tokenized_corpus
+        bm25 = create_bm25_index(documents, save)
+    return bm25
 
 
 
@@ -78,7 +82,9 @@ LOGGER.debug("Articles loaded successfully")
 
 LOGGER.debug("Creating BM25 Index...")
 
-BM25, tokenized_corpus = get_or_create_bm25_index(article_contents)
+tokenized_corpus = tokenize_documents(article_contents)
+create_bm25_index(article_contents, save=True)
+BM25 = get_or_create_bm25_index(article_contents)
 
 mcp_server = FastMCP(
     name="BM25_Index",
@@ -109,7 +115,7 @@ def query_bm25_index(
     top_n_articles = BM25.get_top_n(tokenized_query, article_contents, n=3)
 
     # Return the original article contents for the top N documents
-    print(f"Top n articles: {top_n_articles}")
+    LOGGER.debug(f"Top n articles: {top_n_articles}")
     top_documents = []
     for article in top_n_articles:
         article_name = article.split("<article_name>")[1].split("</article_name>")[0]
@@ -123,3 +129,5 @@ def query_bm25_index(
 
 if __name__ == "__main__":
     mcp_server.run(show_banner=False)
+
+# TOOD: We want someway to combine the results from here with the results from the supabase_tools.py script to get a true hybrid search
