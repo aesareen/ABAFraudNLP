@@ -86,16 +86,16 @@ flowchart TD
 
 ### 3.2 Real Streamlit Dashboard Visuals
 
-![Dashboard](dash.png)
-![Embedding Map](embed.png)
-![Category Frequency](rename.png)
+![Dashboard](images/dash.png)
+![Embedding Map](images/embed.png)
+![Category Frequency](images/rename.png)
 ![Heatmap](images/heat.png)
 
 ---
 
 ### 3.3 Supabase Database Schema
 
-![Supabase Schema](supa.png)
+![Supabase Schema](images/supa.png)
 
 ---
 
@@ -192,9 +192,9 @@ results = query_bm25_index("cyber fraud attack")
 
 ## Key Visual Findings (Real)
 
-![Category Frequency](images/frequency_chart.png)
-![Heatmap](images/heatmap.png)
-![Embedding Map](images/embedding_map.png)
+![Category Frequency](images/rename.png)
+![Heatmap](images/heat.png)
+![Embedding Map](images/embed.png)
 
 ---
 
@@ -206,6 +206,7 @@ results = query_bm25_index("cyber fraud attack")
 
 ```
 ```
+
 
 
 
