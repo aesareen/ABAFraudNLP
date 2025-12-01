@@ -66,7 +66,7 @@ uv run streamlit run streamlit/streamlit_app.py
 ## 3. Visuals / Application Design
 
 ### 3.1 Architecture Diagram
-<img width="3132" height="2655" alt="image" src="images/architecture_diagram.png" />
+<img width="3132" height="2655" alt="architecture_diagram" src="https://github.com/user-attachments/assets/20a166f6-15c2-46f3-9ffc-c5c9e35e94a0" />
 
 
 ---
@@ -195,6 +195,7 @@ results = query_bm25_index("cyber fraud attack")
 
 ```
 ```
+
 
 
 
