@@ -95,7 +95,7 @@ flowchart TD
 
 ### 3.3 Supabase Database Schema
 
-![Supabase Schema](images/supabase_schema.png)
+![Supabase Schema](supa.png)
 
 ---
 
@@ -206,6 +206,7 @@ results = query_bm25_index("cyber fraud attack")
 
 ```
 ```
+
 
 
 
