@@ -10,10 +10,10 @@ from nltk.corpus import stopwords
 import altair as alt
 import numpy as np
 import pandas as pd
-import requests
 import streamlit as st
 from sklearn.decomposition import PCA
 from dotenv import load_dotenv
+from supabase import create_client, Client
 
 # ============================================================
 # Environment / Supabase config
@@ -30,14 +30,8 @@ if not SUPABASE_URL or not SUPABASE_KEY:
         "Add them to your .env file and restart the app."
     )
 
-REST_BASE = f"{SUPABASE_URL}/rest/v1"
-
-HEADERS = {
-    "apikey": SUPABASE_KEY,
-    "Authorization": f"Bearer {SUPABASE_KEY}",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-}
+# Create Supabase client
+CLIENT: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 # Table names – you can override via .env if needed
 ARTICLES_TABLE = os.getenv("ARTICLES_TABLE", "articles")
@@ -70,17 +64,15 @@ def fetch_table(
     select: str = "*",
 ) -> pd.DataFrame:
     """
-    Fetch rows from a Supabase table via the REST API and return a DataFrame.
+    Fetch rows from a Supabase table using the Supabase client and return a DataFrame.
     """
-    url = f"{REST_BASE}/{table_name}"
-    params: dict[str, str] = {"select": select}
+    query = CLIENT.table(table_name).select(select)
+    
     if limit is not None:
-        params["limit"] = str(limit)
-
-    resp = requests.get(url, headers=HEADERS, params=params, timeout=30)
-    resp.raise_for_status()
-    data = resp.json()
-    return pd.DataFrame(data)
+        query = query.limit(limit)
+    
+    response = query.execute()
+    return pd.DataFrame(response.data)
 
 @st.cache_data
 def fetch_number_of_rows(table_name: str) -> int:
@@ -258,7 +250,7 @@ def get_top_terms(text_series: pd.Series, n: int = 15) -> pd.DataFrame:
         return pd.DataFrame(columns=["term", "count"])
     return pd.DataFrame(counts, columns=["term", "count"])
 
-
+p
 # ============================================================
 # Chart helpers (Altair)
 # ============================================================
