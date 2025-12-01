@@ -1,12 +1,20 @@
 # streamlit_app.py
 
 import os
+import sys
+
+# Add project root to path to allow importing from 'agents'
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if project_root not in sys.path:
+    sys.path.append(project_root)
+
 import ast
 import re
+import asyncio
 from collections import Counter
 from urllib.parse import urlparse
 from nltk.corpus import stopwords
-
+from agents.summarization_agent import initialize_summarization_agent
 import altair as alt
 import numpy as np
 import pandas as pd
@@ -43,6 +51,13 @@ if "max_rows" not in st.session_state:
     st.session_state.max_rows = 20
 if "case_sensitive" not in st.session_state:
     st.session_state.case_sensitive = True
+if "keyword" not in st.session_state:
+    st.session_state.keyword = ""
+if "enable_llm_analysis" not in st.session_state:
+    st.session_state.enable_llm_analysis = None
+if "llm_summary" not in st.session_state:
+    st.session_state.llm_summary = None
+
 
 # ============================================================
 # Small helpers
@@ -249,6 +264,12 @@ def get_top_terms(text_series: pd.Series, n: int = 15) -> pd.DataFrame:
     if not counts:
         return pd.DataFrame(columns=["term", "count"])
     return pd.DataFrame(counts, columns=["term", "count"])
+
+@st.cache_resource
+async def generate_llm_summary(keyword: str) -> str:
+    agent = initialize_summarization_agent()
+    summary = await agent.generate_article_keyword_summary(keyword)
+    return summary
 
 
 # ============================================================
@@ -576,21 +597,21 @@ min_articles = st.slider(
 )
 
 # Decide keyword
-keyword = ""
+st.session_state.keyword = ""
 if custom.strip():
-    keyword = custom.strip()
+    st.session_state.keyword = custom.strip()
 elif preset != preset_options[0]:
-    keyword = preset
+    st.session_state.keyword = preset
 
-if not keyword:
+if not st.session_state.keyword:
     st.info("Choose a preset keyword or type your own word to explore the articles.")
     st.stop()
 
 # Filter
-filtered_df = filter_by_keyword(df_all, keyword, case_sensitive=st.session_state.case_sensitive)
+filtered_df = filter_by_keyword(df_all, st.session_state.keyword, case_sensitive=st.session_state.case_sensitive)
 
 if filtered_df.empty:
-    st.warning(f"No articles found that mention '{keyword}'. Try a different word.")
+    st.warning(f"No articles found that mention '{st.session_state.keyword}'. Try a different word.")
     st.stop()
 
 # ------------------------------------------------------------
@@ -628,7 +649,7 @@ else:
     n_topics = 0
 
 k1, k2, k3, k4 = st.columns(4)
-k1.metric(f"Articles mentioning '{keyword}'", n_articles)
+k1.metric(f"Articles mentioning '{st.session_state.keyword}'", n_articles)
 k2.metric("Distinct fraud topics", n_topics if n_topics else "N/A")
 k3.metric("Unique sources", unique_sources)
 k4.metric("Avg. article length (words)", avg_words if avg_words else "N/A")
@@ -639,8 +660,23 @@ if n_articles < min_articles:
     st.warning(
         f"Only {n_articles} articles mention this word — below your warning threshold of {min_articles}."
     )
+if st.session_state.keyword:
+    st.session_state.enable_llm_analysis = st.checkbox("Enable LLM analysis", value=False)
 
 st.markdown("---")
+
+# ------------------------------------------------------------
+# LLM analysis
+# ------------------------------------------------------------
+if st.session_state.enable_llm_analysis:
+    st.subheader("LLM analysis")
+    st.write("LLM analysis is enabled")
+    with st.spinner("Generating summary..."):
+        summary = asyncio.run(generate_llm_summary(st.session_state.keyword))
+    st.session_state.llm_summary = summary
+    st.markdown(st.session_state.llm_summary)
+
+    st.markdown('---')
 
 # ------------------------------------------------------------
 # Tabs for charts and table
@@ -735,7 +771,7 @@ with tab_table:
 
         # Download button
         csv = table_df.to_csv(index=False).encode("utf-8")
-        file_keyword = re.sub(r"\W+", "_", keyword.lower())
+        file_keyword = re.sub(r"\W+", "_", st.session_state.keyword.lower())
         st.download_button(
             label="Download matching articles as CSV",
             data=csv,
