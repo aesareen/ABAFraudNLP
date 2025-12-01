@@ -36,6 +36,7 @@ Then edit `config/.env`:
 OPENAI_API_KEY=your_key
 SUPABASE_URL=your_supabase_url
 SUPABASE_KEY=your_supabase_key
+BM25_INDEX_PATH="./data/BM25.pkl" #optional
 ```
 
 ### Run the full pipeline
@@ -65,22 +66,8 @@ uv run streamlit run streamlit/streamlit_app.py
 ## 3. Visuals / Application Design
 
 ### 3.1 Architecture Diagram
+<img width="3132" height="2655" alt="image" src="images/architecture_diagram.png" />
 
-```mermaid
-flowchart TD
-    A["ABA Fraud Articles"] --> B["Scraper (Crawl4AI)"]
-    B --> C["Raw Markdown & JSON"]
-    C --> D["Cleaning + Standardization"]
-    D --> E["LLM Summaries + Keywords"]
-    D --> F["OpenAI Embeddings"]
-    E --> G["Supabase: article_extract"]
-    D --> H["Supabase: articles"]
-    F --> I["Supabase: article_embeddings"]
-    H --> J["BM25 Index (bm25.py)"]
-    G --> K["Streamlit Dashboard"]
-    I --> K
-    H --> K
-```
 
 ---
 
@@ -206,6 +193,7 @@ results = query_bm25_index("cyber fraud attack")
 
 ```
 ```
+
 
 
 
