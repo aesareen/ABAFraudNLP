@@ -223,8 +223,5 @@ __marimo__/
 .env.*
 Streamlit UI/.env
 
-# Streamlit stuff
-.streamlit/secrets.toml
-.history
 
 
