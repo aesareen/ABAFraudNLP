@@ -71,9 +71,9 @@ uv run streamlit run streamlit/streamlit_app.py
 
 ---
 
-### 3.2 Real Streamlit Dashboard Visuals
+### 3.2 Streamlit Dashboard Visuals
 
-![Dashboard](images/dash.png)
+![Dashboard](images/updated_dash.png)
 ![Embedding Map](images/embed.png)
 ![Category Frequency](images/rename.png)
 ![Heatmap](images/heat.png)
@@ -86,8 +86,7 @@ uv run streamlit run streamlit/streamlit_app.py
 
 ---
 
-### 3.4 Folder Structure (Real)
-
+### 3.4 Folder Structure
 ```
 ABAFraudNLP/
 ├── agents/
@@ -116,14 +115,25 @@ ABAFraudNLP/
 
 ## 3a. What We Did 
 
-### 3a.1 Real Sample Article (Short Preview)
+### 3a.1 Sample Articles
+
+#### 3a.1.1: Manually Selected Sources:
+**Source:**
+`data\scraped_markdown_results\deloitte-2026-could-be-defining-year-for-banks.md`
+
+**Preview:**
+
+> “A coalition of consumer groups is urging voice service providers to take stronger action to combat fraudulent robocalls and phone-based scams. The groups emphasized the growing risks posed by spoofed caller IDs and called for more aggressive enforcement…”
+
+#### 3a.1.2: Deep Crawled Sources:
 
 **Source:**
 `data/scraped_markdown_results/aba-consumer-group-urge-action-by-voice-service-providers-to-combat-fraud.md`
 
 **Preview:**
 
-> “A coalition of consumer groups is urging voice service providers to take stronger action to combat fraudulent robocalls and phone-based scams. The groups emphasized the growing risks posed by spoofed caller IDs and called for more aggressive enforcement…”
+> “Economic uncertainty could test U.S. banks’ revenues and profitability in 2026, and many institutions will likely need to make major decisions on stablecoins and artificial intelligence, according to a new report by the auditing and consulting firm Deloitte...”
+
 
 ---
 
@@ -185,6 +195,7 @@ results = query_bm25_index("cyber fraud attack")
 
 ```
 ```
+
 
 
 
