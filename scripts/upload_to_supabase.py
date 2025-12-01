@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 import glob
 import json
+import vecs
 from datetime import datetime, timezone
 from rich import print
 from postgrest.exceptions import APIError
@@ -20,24 +21,25 @@ OPENAI_CLIENT: OpenAI = OpenAI(api_key=openai_api_key)
 
 def get_embeddings(text: str):
     response = OPENAI_CLIENT.embeddings.create(
-        input=text,
+        input=text.lower().strip(),
         model="text-embedding-3-small"
     )
     return response.data[0].embedding
 
 def upload_json_to_supabase(json_content: dict):
     json_dict = json_content[0]
-    article_name = json_dict.get('name')
+    article_name = json_dict.get('article_name')
 
+    
     if not article_name:
         raise ValueError("Article name is required")
 
     # Check if article with this name already exists
-    existing = CLIENT.table("articles").select("*").eq("name", article_name).execute()
+    existing = CLIENT.table("articles").select("*").eq("article_name", article_name).execute()
 
     # If article exists, update it
     if existing.data:
-        response = CLIENT.table("articles").update(json_dict).eq("name", article_name).execute()
+        response = CLIENT.table("articles").update(json_dict).eq("article_name", article_name).execute()
         return response
     else: # otherwise, insert it
         json_dict['created_at'] = datetime.now(timezone.utc).isoformat()
@@ -63,6 +65,22 @@ def upload_embeddings_to_supabase(article_name: str, raw_content: str):
         
     return response
 
+def query_embeddings_from_supabase(query: str) -> tuple[list[str], list[str], list[str]]:
+    embedded_query = get_embeddings(query)
+    response = CLIENT.rpc("match_documents", {
+        "query_embedding": embedded_query,
+        "match_threshold": 0.4,
+        "match_count": 4
+    }).execute()
+    # Ideally we would return the article nmaes and contents, so we can do a join on the article_id and get the article names and contents
+    article_ids = [item['article_id'] for item in response.data]
+    articles = CLIENT.table("articles").select("article_name, raw_content").in_("article_id", article_ids).execute()
+    summaries = CLIENT.table("article_extract").select("text").eq("type", "summary").in_("article_id", article_ids).execute()
+    article_names = [article['article_name'] for article in articles.data]
+    article_contents = [article['raw_content'] for article in articles.data]
+    summaries = [summary['text'] for summary in summaries.data]
+    return article_names, article_contents, summaries
+
 def upload_keywords_to_supabase(article_name: str, keywords: list[str]) -> bool:
     if not article_name:
         raise ValueError("Article name is required")
@@ -83,7 +101,7 @@ def upload_keywords_to_supabase(article_name: str, keywords: list[str]) -> bool:
     
     return True
 
-def upload_summary_to_supabase(article_name: str, summary: str):
+def upload_summary_to_supabase(article_name: str, summary: str, overwrite: bool = False):
     if not article_name:
         raise ValueError("Article name is required")
     if not summary:
@@ -91,19 +109,23 @@ def upload_summary_to_supabase(article_name: str, summary: str):
     
     # Check if article with this name already exists
     existing_article = CLIENT.table("articles").select("*").eq("article_name", article_name).single().execute().data.get('article_id')
-    if existing_article:
+    if existing_article and not overwrite:
         CLIENT.table("article_extract").insert({
             "article_id": existing_article,
             "type": "summary",
             "text": summary
         }).execute()
+    elif existing_article and overwrite:
+        CLIENT.table("article_extract").update({
+            "type": "summary",
+            "text": summary
+        }).eq("article_id", existing_article).execute()
     else:
         raise ValueError("Article not found")
     
     return True
 
-if __name__ == "__main__":
-    # Load in all the JSON files in our data folder
+def upload_all_json_files_to_supabase():
     json_files = glob.glob("data/scraped_json_results/*.json")
     with Progress() as progress:
         for file in progress.track(json_files, description="Uploading articles"):
@@ -120,3 +142,7 @@ if __name__ == "__main__":
             except ValueError as e:
                 print(f"[red]Validation error for {file}: {e}[/red]")
                 continue
+
+if __name__ == "__main__":
+    # Load in all the JSON files in our data folder
+    print(query_embeddings_from_supabase("cybersecurity breaches"))
