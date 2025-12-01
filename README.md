@@ -114,7 +114,7 @@ ABAFraudNLP/
 
 ---
 
-## 3a. What We Did (with real examples)
+## 3a. What We Did 
 
 ### 3a.1 Real Sample Article (Short Preview)
 
@@ -130,14 +130,12 @@ ABAFraudNLP/
 ### 3a.2 Minimal Example of LLM Keyword Extraction
 
 ```python
-agent = initialize_summarization_agent()
-
-response = await agent.generate_article_keywords(
-    article_text,
-    []
-)
-
-print(response)
+def get_embeddings(text: str):
+    response = OPENAI_CLIENT.embeddings.create(
+        input=text.lower().strip(),
+        model="text-embedding-3-small"
+    )
+    return response.data[0].embedding
 ```
 
 ---
@@ -147,6 +145,8 @@ print(response)
 ```python
 from openai import OpenAI
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+
 
 emb = client.embeddings.create(
     model="text-embedding-3-small",
@@ -177,14 +177,6 @@ results = query_bm25_index("cyber fraud attack")
 
 ---
 
-## Key Visual Findings (Real)
-
-![Category Frequency](images/rename.png)
-![Heatmap](images/heat.png)
-![Embedding Map](images/embed.png)
-
----
-
 # Additional Links
 
 * Streamlit: [https://streamlit.io](https://streamlit.io)
@@ -193,6 +185,7 @@ results = query_bm25_index("cyber fraud attack")
 
 ```
 ```
+
 
 
 
