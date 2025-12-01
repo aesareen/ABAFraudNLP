@@ -89,7 +89,7 @@ flowchart TD
 ![Dashboard](dash.png)
 ![Embedding Map](embed.png)
 ![Category Frequency](rename.png)
-![Heatmap](images/heatmap.png)
+![Heatmap](images/heat.png)
 
 ---
 
@@ -206,6 +206,7 @@ results = query_bm25_index("cyber fraud attack")
 
 ```
 ```
+
 
 
 
