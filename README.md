@@ -3,7 +3,7 @@
 
 AI-powered NLP system for scraping, enriching, and analyzing fraud-related articles from the American Bankkers Association (ABA).
 
-**Team:** Maksim Dimitrijević • Arnav Sareen • Ana Abreu • Nabeel Balighuddin  
+**Team:** Arnav Sareen • Maksim Dimitrijević • Ana Abreu • Nabeel Balighuddin  
 UNC Charlotte • DTSC 3602 – USAA Fraud Analytics Project  
 
 ---
@@ -206,6 +206,7 @@ results = query_bm25_index("cyber fraud attack")
 
 ```
 ```
+
 
 
 
