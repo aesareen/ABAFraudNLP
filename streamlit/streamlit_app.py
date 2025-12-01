@@ -250,7 +250,7 @@ def get_top_terms(text_series: pd.Series, n: int = 15) -> pd.DataFrame:
         return pd.DataFrame(columns=["term", "count"])
     return pd.DataFrame(counts, columns=["term", "count"])
 
-p
+
 # ============================================================
 # Chart helpers (Altair)
 # ============================================================
