@@ -1,10 +1,11 @@
 
 # ABAFraudNLP
 
-AI-powered NLP system for scraping, enriching, and analyzing fraud-related articles from the American Bankkers Association (ABA).
-
+AI-powered NLP system for scraping, enriching, and analyzing fraud-related articles from the American Bankers Association (ABA).
 **Team:** Arnav Sareen • Maksim Dimitrijević • Ana Abreu • Nabeel Balighuddin  
 UNC Charlotte • DTSC 3602 – USAA Fraud Analytics Project  
+
+**Want to try our app out** Click [here](https://asareen2--abafraudnlp-run.modal.run/)!
 
 ---
 
@@ -195,6 +196,7 @@ results = query_bm25_index("cyber fraud attack")
 
 ```
 ```
+
 
 
 
