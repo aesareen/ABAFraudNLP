@@ -270,6 +270,12 @@ class StreamlitStatusHooks(AgentHooks):
     def __init__(self, status_container):
         self.status = status_container
 
+    async def pre_step(self, context):
+        self.status.write(f"🤖 Calling LLM...")
+
+    async def post_step(self, context):
+        self.status.write(f"✅ LLM response received!")
+
     async def pre_tool_call(self, context, tool_call):
         # Update status when a tool starts
         self.status.write(f"🛠️ Running tool: **{tool_call.name}**...")
