@@ -17,6 +17,9 @@ from pydantic import BaseModel, Field
 
 project_root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 
+if not os.path.exists(os.path.join(project_root, "logs")):
+    os.makedirs(os.path.join(project_root, "logs"))
+
 logging.basicConfig(
     filename=os.path.join(project_root, "logs/summarization_agent.log"),
     level=logging.DEBUG,
