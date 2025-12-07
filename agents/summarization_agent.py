@@ -215,7 +215,7 @@ class SummarizationAgent(PocketAgent):
         return response
 
 
-def initialize_summarization_agent(schema = None, schema_name = None):
+def initialize_summarization_agent(schema = None, schema_name = None, hooks = None):
     """Initialize the summarization agent"""
     summarization_agent_mcp_config: dict[str, dict[str, str]] = {
         "mcpServers": {
@@ -262,6 +262,7 @@ def initialize_summarization_agent(schema = None, schema_name = None):
         mcp_config=summarization_agent_mcp_config,
         router=ROUTER,
         logger=LOGGER,
+        hooks=hooks,
     )
 
     LOGGER.debug("Summarization agent initialized successfully")

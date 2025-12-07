@@ -15,6 +15,7 @@ from collections import Counter
 from urllib.parse import urlparse
 from nltk.corpus import stopwords
 from agents.summarization_agent import initialize_summarization_agent
+from pocket_agent import AgentHooks
 import altair as alt
 import numpy as np
 import pandas as pd
@@ -265,10 +266,33 @@ def get_top_terms(text_series: pd.Series, n: int = 15) -> pd.DataFrame:
         return pd.DataFrame(columns=["term", "count"])
     return pd.DataFrame(counts, columns=["term", "count"])
 
-@st.cache_resource
+class StreamlitStatusHooks(AgentHooks):
+    def __init__(self, status_container):
+        self.status = status_container
+
+    async def pre_tool_call(self, context, tool_call):
+        # Update status when a tool starts
+        self.status.write(f"🛠️ Running tool: **{tool_call.name}**...")
+        return None
+    
+    async def post_tool_call(self, context, tool_call, result):
+        # Update status when a tool finishes
+        self.status.write(f"✅ Completed: **{tool_call.name}**")
+        return result
+
 async def generate_llm_summary(keyword: str) -> str:
-    agent = initialize_summarization_agent()
-    summary = await agent.generate_article_keyword_summary(keyword)
+    # Create a status container for the user to see progress
+    with st.status("Analyzing articles...", expanded=True) as status:
+        hooks = StreamlitStatusHooks(status)
+        
+        # Initialize agent with our custom hooks
+        agent = initialize_summarization_agent(hooks=hooks)
+        
+        status.write("Generating summary...")
+        summary = await agent.generate_article_keyword_summary(keyword)
+        
+        status.update(label="Analysis complete!", state="complete", expanded=False)
+        
     return summary
 
 
@@ -671,10 +695,12 @@ st.markdown("---")
 if st.session_state.enable_llm_analysis:
     st.subheader("LLM analysis")
     st.write("LLM analysis is enabled")
-    with st.spinner("Generating summary..."):
+    if not st.session_state.llm_summary:
         summary = asyncio.run(generate_llm_summary(st.session_state.keyword))
-    st.session_state.llm_summary = summary
-    st.markdown(st.session_state.llm_summary)
+        st.session_state.llm_summary = summary
+        st.markdown(st.session_state.llm_summary)
+    else:
+        st.markdown(st.session_state.llm_summary)
 
     st.markdown('---')
 
