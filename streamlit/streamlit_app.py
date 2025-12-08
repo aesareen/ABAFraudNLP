@@ -28,7 +28,7 @@ from supabase import create_client, Client
 # Environment / Supabase config
 # ============================================================
 
-load_dotenv('config/.env', override=True)
+load_dotenv("config/.env", override=True)
 
 SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_KEY")
@@ -64,6 +64,7 @@ if "llm_summary" not in st.session_state:
 # Small helpers
 # ============================================================
 
+
 def extract_domain(url: str) -> str:
     try:
         return urlparse(url).netloc.replace("www.", "")
@@ -83,12 +84,13 @@ def fetch_table(
     Fetch rows from a Supabase table using the Supabase client and return a DataFrame.
     """
     query = CLIENT.table(table_name).select(select)
-    
+
     if limit is not None:
         query = query.limit(limit)
-    
+
     response = query.execute()
     return pd.DataFrame(response.data)
+
 
 @st.cache_data
 def fetch_number_of_rows(table_name: str) -> int:
@@ -204,7 +206,11 @@ def load_data(max_rows: int = 20) -> pd.DataFrame | None:
     # --- Embeddings & PCA ---
     emb_df = compute_embedding_coords(emb_df)
     if not emb_df.empty:
-        emb_small = emb_df[["article_id", "x", "y"]] if "article_id" in emb_df.columns else pd.DataFrame()
+        emb_small = (
+            emb_df[["article_id", "x", "y"]]
+            if "article_id" in emb_df.columns
+            else pd.DataFrame()
+        )
     else:
         emb_small = pd.DataFrame()
 
@@ -231,7 +237,9 @@ def load_data(max_rows: int = 20) -> pd.DataFrame | None:
 STOPWORDS = stopwords.words("english")
 
 
-def filter_by_keyword(df: pd.DataFrame, keyword: str, case_sensitive: bool) -> pd.DataFrame:
+def filter_by_keyword(
+    df: pd.DataFrame, keyword: str, case_sensitive: bool
+) -> pd.DataFrame:
     """
     Filter rows where keyword appears in title, content, or fraud_topic.
     """
@@ -247,7 +255,9 @@ def filter_by_keyword(df: pd.DataFrame, keyword: str, case_sensitive: bool) -> p
     mask = False
     for col in cols:
         series = df[col].astype("string")
-        mask = mask | series.str.contains(keyword, case=case_sensitive, regex=False, na=False)
+        mask = mask | series.str.contains(
+            keyword, case=case_sensitive, regex=False, na=False
+        )
 
     return df[mask]
 
@@ -266,6 +276,47 @@ def get_top_terms(text_series: pd.Series, n: int = 15) -> pd.DataFrame:
         return pd.DataFrame(columns=["term", "count"])
     return pd.DataFrame(counts, columns=["term", "count"])
 
+
+def get_keyword_snippet(text: str, keyword: str, window_chars: int = 50) -> str:
+    """
+    Find first occurrence of keyword and return a snippet around it.
+    Highlights the keyword using Markdown bold.
+    """
+    if not text or not keyword:
+        return text[:200] + "..." if text and len(text) > 200 else text
+
+    text_lower = text.lower()
+    keyword_lower = keyword.lower()
+
+    try:
+        start_idx = text_lower.index(keyword_lower)
+    except ValueError:
+        # Keyword not found in text (maybe matched title/topic)
+        return text[:200] + "..." if len(text) > 200 else text
+
+    # Calculate snippet bounds
+    start = max(0, start_idx - window_chars)
+    end = min(len(text), start_idx + len(keyword) + window_chars)
+
+    snippet = text[start:end]
+
+    # Add ellipses if truncated
+    if start > 0:
+        snippet = "..." + snippet
+    if end < len(text):
+        snippet = snippet + "..."
+
+    # Highlight keyword in the snippet (case-insensitive replacement for display)
+    snippet = re.sub(
+        f"({re.escape(keyword)})",
+        r"<span style='background-color:#ffd700; color:black; padding:0 4px; border-radius:3px;'>\1</span>",
+        snippet,
+        flags=re.IGNORECASE,
+    )
+
+    return snippet
+
+
 class StreamlitStatusHooks(AgentHooks):
     def __init__(self, status_container):
         self.status = status_container
@@ -280,31 +331,33 @@ class StreamlitStatusHooks(AgentHooks):
         # Update status when a tool starts
         self.status.write(f"🛠️ Running tool: **{tool_call.name}**...")
         return None
-    
+
     async def post_tool_call(self, context, tool_call, result):
         # Update status when a tool finishes
         self.status.write(f"✅ Completed: **{tool_call.name}**")
         return result
 
+
 async def generate_llm_summary(keyword: str) -> str:
     # Create a status container for the user to see progress
     with st.status("Analyzing articles...", expanded=True) as status:
         hooks = StreamlitStatusHooks(status)
-        
+
         # Initialize agent with our custom hooks
         agent = initialize_summarization_agent(hooks=hooks)
-        
+
         status.write("Generating summary...")
         summary = await agent.generate_article_keyword_summary(keyword)
-        
+
         status.update(label="Analysis complete!", state="complete", expanded=False)
-        
+
     return summary
 
 
 # ============================================================
 # Chart helpers (Altair)
 # ============================================================
+
 
 def make_timeline_chart(df: pd.DataFrame):
     if "published_date" not in df.columns or "article_id" not in df.columns:
@@ -316,9 +369,7 @@ def make_timeline_chart(df: pd.DataFrame):
 
     tmp["month"] = tmp["published_date"].dt.to_period("M").dt.to_timestamp()
     group = (
-        tmp.groupby("month")["article_id"]
-        .nunique()
-        .reset_index(name="article_count")
+        tmp.groupby("month")["article_id"].nunique().reset_index(name="article_count")
     )
 
     if group.empty:
@@ -362,7 +413,9 @@ def make_fraud_topic_chart(df: pd.DataFrame):
         .encode(
             x=alt.X("article_count:Q", title="Number of matching articles"),
             y=alt.Y("fraud_topic:N", sort="-x", title="Fraud topic"),
-            color=alt.Color("article_count:Q", legend=None, scale=alt.Scale(scheme="blues")),
+            color=alt.Color(
+                "article_count:Q", legend=None, scale=alt.Scale(scheme="blues")
+            ),
             tooltip=[
                 alt.Tooltip("fraud_topic:N", title="Fraud topic"),
                 alt.Tooltip("article_count:Q", title="Articles"),
@@ -378,7 +431,11 @@ def make_topics_heatmap(df: pd.DataFrame):
     """
     Heatmap: fraud_topic vs month.
     """
-    if "fraud_topic" not in df.columns or "published_date" not in df.columns or "article_id" not in df.columns:
+    if (
+        "fraud_topic" not in df.columns
+        or "published_date" not in df.columns
+        or "article_id" not in df.columns
+    ):
         return None
 
     tmp = df.dropna(subset=["fraud_topic", "published_date"]).copy()
@@ -400,8 +457,7 @@ def make_topics_heatmap(df: pd.DataFrame):
         group.groupby("fraud_topic")["article_count"]
         .sum()
         .sort_values(ascending=False)
-        .index
-        .tolist()
+        .index.tolist()
     )
 
     chart = (
@@ -511,7 +567,9 @@ def make_embedding_chart(df: pd.DataFrame):
     if "title" in tmp.columns:
         tooltip_fields.append(alt.Tooltip("title:N", title="Title"))
     if "published_date" in tmp.columns:
-        tooltip_fields.append(alt.Tooltip("published_date:T", title="Date", format="%Y-%m-%d"))
+        tooltip_fields.append(
+            alt.Tooltip("published_date:T", title="Date", format="%Y-%m-%d")
+        )
     if "fraud_topic" in tmp.columns:
         tooltip_fields.append(alt.Tooltip("fraud_topic:N", title="Fraud topic"))
     if "source" in tmp.columns:
@@ -544,14 +602,16 @@ st.write(
     "It looks at ABA fraud-related news articles and shows how key words, topics, "
     "and sources show up over time."
 )
-st.caption("Data source: ABA fraud news articles stored in a Supabase Postgres database.")
+st.caption(
+    "Data source: ABA fraud news articles stored in a Supabase Postgres database."
+)
 
 # ------------------------------------------------------------
 # Sidebar
 # ------------------------------------------------------------
 with st.sidebar:
     st.header("Settings")
-    
+
     st.session_state.all_articles = st.checkbox("Load all articles", value=False)
     total_rows = fetch_number_of_rows(ARTICLES_TABLE)
     # If "Load all articles" is checked, update max_rows to total count
@@ -564,7 +624,7 @@ with st.sidebar:
             step=5,
             value=total_rows,
             disabled=True,
-            help="All articles are being loaded"
+            help="All articles are being loaded",
         )
     else:
         st.session_state.max_rows = st.number_input(
@@ -638,10 +698,17 @@ if not st.session_state.keyword:
     st.stop()
 
 # Filter
-filtered_df = filter_by_keyword(df_all, st.session_state.keyword, case_sensitive=st.session_state.case_sensitive)
+filtered_df = filter_by_keyword(
+    df_all, st.session_state.keyword, case_sensitive=st.session_state.case_sensitive
+)
+
+if not filtered_df.empty:
+    filtered_df = filtered_df.drop_duplicates(subset=["title", "content"])
 
 if filtered_df.empty:
-    st.warning(f"No articles found that mention '{st.session_state.keyword}'. Try a different word.")
+    st.warning(
+        f"No articles found that mention '{st.session_state.keyword}'. Try a different word."
+    )
     st.stop()
 
 # ------------------------------------------------------------
@@ -652,12 +719,12 @@ if "article_id" in filtered_df.columns:
 else:
     n_articles = len(filtered_df)
 
-unique_sources = filtered_df["source"].nunique() if "source" in filtered_df.columns else 0
+unique_sources = (
+    filtered_df["source"].nunique() if "source" in filtered_df.columns else 0
+)
 
 if "content" in filtered_df.columns:
-    word_counts = filtered_df["content"].fillna("").apply(
-        lambda x: len(str(x).split())
-    )
+    word_counts = filtered_df["content"].fillna("").apply(lambda x: len(str(x).split()))
     avg_words = int(word_counts.mean()) if not word_counts.empty else 0
 else:
     avg_words = 0
@@ -691,7 +758,9 @@ if n_articles < min_articles:
         f"Only {n_articles} articles mention this word — below your warning threshold of {min_articles}."
     )
 if st.session_state.keyword:
-    st.session_state.enable_llm_analysis = st.checkbox("Enable LLM analysis", value=False)
+    st.session_state.enable_llm_analysis = st.checkbox(
+        "Enable LLM analysis", value=False
+    )
 
 st.markdown("---")
 
@@ -708,7 +777,7 @@ if st.session_state.enable_llm_analysis:
     else:
         st.markdown(st.session_state.llm_summary)
 
-    st.markdown('---')
+    st.markdown("---")
 
 # ------------------------------------------------------------
 # Tabs for charts and table
@@ -782,34 +851,96 @@ with tab_embed:
 
 # ---------- Articles table tab ----------
 with tab_table:
-    st.subheader("Articles table")
+    st.subheader("Articles list")
 
-    table_cols = [
-        c
-        for c in ["published_date", "title", "fraud_topic", "source_url", "source"]
-        if c in filtered_df.columns
-    ]
-    if table_cols:
-        table_df = (
-            filtered_df[table_cols]
-            .sort_values(
-                by="published_date" if "published_date" in table_cols else table_cols[0],
-                ascending=False,
-            )
-            .reset_index(drop=True)
-        )
-
-        st.dataframe(table_df, use_container_width=True, hide_index=True)
-
-        # Download button
-        csv = table_df.to_csv(index=False).encode("utf-8")
-        file_keyword = re.sub(r"\W+", "_", st.session_state.keyword.lower())
-        st.download_button(
-            label="Download matching articles as CSV",
-            data=csv,
-            file_name=f"articles_{file_keyword}.csv",
-            mime="text/csv",
-        )
+    if filtered_df.empty:
+        st.info("No articles to display.")
     else:
-        st.info("No columns available to display an articles table.")
+        # Sort by date descending
+        display_df = filtered_df.sort_values(
+            by=(
+                "published_date"
+                if "published_date" in filtered_df.columns
+                else "article_id"
+            ),
+            ascending=False,
+        )
 
+        if "page_number" not in st.session_state:
+            st.session_state.page_number = 1
+
+        PAGE_SIZE = 5
+        total_rows = len(display_df)
+        total_pages = (total_rows - 1) // PAGE_SIZE + 1
+
+        if st.session_state.page_number > total_pages:
+            st.session_state.page_number = 1
+
+        start_idx = (st.session_state.page_number - 1) * PAGE_SIZE
+        end_idx = start_idx + PAGE_SIZE
+
+        batch_df = display_df.iloc[start_idx:end_idx]
+
+        csv = display_df.to_csv(index=False).encode("utf-8")
+        file_keyword = re.sub(r"\W+", "_", st.session_state.keyword.lower())
+
+        col_dl, col_pag_info = st.columns([2, 2])
+        with col_dl:
+            st.download_button(
+                label="Download matching articles as CSV",
+                data=csv,
+                file_name=f"articles_{file_keyword}.csv",
+                mime="text/csv",
+            )
+        with col_pag_info:
+            st.caption(
+                f"Showing {start_idx + 1}-{min(end_idx, total_rows)} of {total_rows} articles"
+            )
+
+        st.markdown("---")
+
+        for _, row in batch_df.iterrows():
+            title = row.get("title", "Untitled Article")
+            url = row.get("source_url", "")
+            date_pub = row.get("published_date", pd.NaT)
+            source = row.get("source", "Unknown Source")
+            topic = row.get("fraud_topic", "General")
+            content = str(row.get("content", ""))
+
+            date_str = (
+                date_pub.strftime("%Y-%m-%d")
+                if pd.notnull(date_pub)
+                else "Unknown Date"
+            )
+
+            snippet = get_keyword_snippet(
+                content, st.session_state.keyword, window_chars=60
+            )
+
+            # Render
+            if url:
+                st.markdown(f"### [{title}]({url})")
+            else:
+                st.markdown(f"### {title}")
+
+            st.markdown(
+                f"**Date:** {date_str} | **Source:** {source} | **Topic:** {topic}"
+            )
+            st.markdown(f"> {snippet}", unsafe_allow_html=True)
+            st.markdown("---")
+
+        c1, c2, c3, c4, c5 = st.columns([1, 1, 1, 1, 1])
+
+        def prev_page():
+            st.session_state.page_number -= 1
+
+        def next_page():
+            st.session_state.page_number += 1
+
+        with c2:
+            if st.session_state.page_number > 1:
+                st.button("Previous", on_click=prev_page)
+
+        with c4:
+            if st.session_state.page_number < total_pages:
+                st.button("Next", on_click=next_page)
